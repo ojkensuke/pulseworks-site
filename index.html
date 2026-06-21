@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PulseWorks | AIを、事業を動かす仕組みに。</title>
+  <meta name="description" content="PulseWorksは、生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて、企業の事業成長を支援します。">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PulseWorks">
+  <meta property="og:title" content="PulseWorks | AIを、事業を動かす仕組みに。">
+  <meta property="og:description" content="生成AIを活用したWeb制作、採用支援、業務改善、AI研修。構想から設計・実装・改善・定着まで伴走します。">
+  <meta property="og:image" content="assets/pulse-icon-primary.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/colors_and_type.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "株式会社PulseWorks",
+    "alternateName": "PulseWorks Inc.",
+    "url": "https://pulseworks.example",
+    "logo": "assets/pulseworks-logo-horizontal.svg",
+    "description": "生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて企業の事業成長を支援する会社。",
+    "slogan": "AIを、事業を動かす仕組みに。"
+  }
+  </script>
+  <style>
+    body { margin: 0; background: #fff; -webkit-font-smoothing: antialiased; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    @keyframes pwDrift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @keyframes pwDash { to { stroke-dashoffset: -260; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+    }
+
+    /* Transitions */
+    a, button { transition: all var(--dur-base) var(--ease-out); }
+
+    /* Header nav */
+    .nav-link { font-size: 14px; font-weight: 600; color: var(--pw-ink-700); text-decoration: none; }
+    .nav-link:hover { color: var(--pw-blue-600); }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block; font-weight: 700; color: #fff;
+      background: var(--pw-blue-600); border-radius: var(--r-btn);
+      text-decoration: none; box-shadow: var(--shadow-blue);
+    }
+    .btn-primary:hover { background: var(--pw-blue-700); transform: translateY(-1px); color: #fff; }
+    .btn-ghost {
+      display: inline-block; font-weight: 700; color: #fff;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.22);
+      border-radius: var(--r-btn); text-decoration: none;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    /* Cards */
+    .service-card {
+      background: #fff; border: 1px solid var(--pw-border-subtle);
+      border-radius: var(--r-md); padding: 30px;
+      box-shadow: var(--shadow-card); display: flex; flex-direction: column;
+    }
+    .service-card:hover { border-color: var(--pw-border-strong); box-shadow: var(--shadow-md); }
+
+    .lab-card {
+      background: #fff; border: 1px solid var(--pw-border-subtle);
+      border-radius: var(--r-md); padding: 24px;
+      box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 10px;
+    }
+    .lab-card:hover { border-color: var(--pw-border-strong); box-shadow: var(--shadow-md); }
+
+    /* Consult link */
+    .consult-link {
+      font-size: 14px; font-weight: 700; color: var(--pw-blue-600);
+      text-decoration: none; display: inline-flex; align-items: center;
+      gap: 6px; align-self: flex-start;
+    }
+    .consult-link:hover { gap: 10px; color: var(--pw-blue-600); }
+
+    /* Form inputs */
+    .pw-input {
+      font-family: var(--font-sans); font-size: 15px; color: var(--pw-ink-900);
+      padding: 12px 14px; border: 1px solid var(--pw-border-strong);
+      border-radius: var(--r-btn); background: #fff; outline: none; width: 100%;
+    }
+    .pw-input:focus { border-color: var(--pw-blue-600); box-shadow: var(--shadow-focus); }
+    textarea.pw-input { resize: vertical; min-height: 120px; line-height: 1.7; }
+
+    /* Interest checkboxes */
+    .interest-label {
+      display: flex; align-items: center; gap: 10px;
+      border: 1px solid var(--pw-border-subtle); border-radius: var(--r-btn);
+      padding: 12px 14px; cursor: pointer; font-size: 14px; color: var(--pw-ink-700);
+      background: var(--pw-surface-alt);
+    }
+    .interest-label:hover { border-color: var(--pw-blue-300); }
+    .interest-label input { width: 18px; height: 18px; accent-color: var(--pw-blue-600); flex: none; }
+
+    /* Footer links */
+    .footer-link { font-size: 14px; color: #C7D2E5; text-decoration: none; }
+    .footer-link:hover { color: #fff; }
+
+    /* Submit button */
+    .btn-submit {
+      font-family: var(--font-sans); font-size: 16px; font-weight: 700;
+      color: #fff; background: var(--pw-blue-600); border: none;
+      padding: 16px 28px; border-radius: var(--r-btn); cursor: pointer;
+      box-shadow: var(--shadow-blue); width: 100%;
+    }
+    .btn-submit:hover { background: var(--pw-blue-700); }
+    .btn-submit:focus { outline: none; box-shadow: var(--shadow-focus); }
+
+    /* Status message */
+    .form-status {
+      display: none; font-size: 14px; line-height: 1.7;
+      padding: 14px 16px; border-radius: var(--r-btn); border: 1px solid;
+    }
+
+    /* Error spans */
+    .field-error { display: none; font-size: 12.5px; color: var(--pw-danger); }
+
+    /* Mobile nav */
+    #mobile-nav { display: none; }
+    #desktop-nav { display: flex; }
+    #menu-btn { display: none; }
+
+    @media (max-width: 879px) {
+      #desktop-nav { display: none !important; }
+      #menu-btn { display: flex !important; }
+    }
+  </style>
+</head>
+<body style="font-family: var(--font-sans); color: var(--pw-ink-600); background: #fff; overflow-x: hidden;">
+
+  <!-- ============ HEADER ============ -->
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--pw-border-subtle);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 14px clamp(20px,5vw,48px); display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+      <a href="#top" aria-label="PulseWorks ホーム" style="display: flex; align-items: center; flex: none;">
+        <img src="assets/pulseworks-logo-horizontal.svg" alt="PulseWorks" height="26" style="height: 26px; width: auto; display: block;">
+      </a>
+
+      <nav id="desktop-nav" aria-label="メインナビゲーション" style="align-items: center; gap: clamp(14px,2.2vw,32px);">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#approach" class="nav-link">Approach</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#contact" class="btn-primary" style="font-size: 14px; padding: 10px 18px;">無料相談をする</a>
+      </nav>
+
+      <button id="menu-btn" onclick="toggleMenu()" aria-label="メニュー" aria-expanded="false"
+        style="flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px;">
+        <span style="display: block; width: 24px; height: 2px; background: var(--pw-ink-900); border-radius: 2px;"></span>
+        <span style="display: block; width: 24px; height: 2px; background: var(--pw-ink-900); border-radius: 2px;"></span>
+        <span style="display: block; width: 24px; height: 2px; background: var(--pw-ink-900); border-radius: 2px;"></span>
+      </button>
+    </div>
+
+    <nav id="mobile-nav" aria-label="モバイルナビゲーション"
+      style="border-top: 1px solid var(--pw-border-subtle); background: #fff; padding: 8px clamp(20px,5vw,48px) 20px; flex-direction: column; gap: 2px;">
+      <a href="#services" onclick="closeMenu()" style="padding: 12px 4px; font-size: 16px; font-weight: 600; color: var(--pw-ink-800); text-decoration: none; border-bottom: 1px solid var(--pw-border-soft);">Services</a>
+      <a href="#approach" onclick="closeMenu()" style="padding: 12px 4px; font-size: 16px; font-weight: 600; color: var(--pw-ink-800); text-decoration: none; border-bottom: 1px solid var(--pw-border-soft);">Approach</a>
+      <a href="#projects" onclick="closeMenu()" style="padding: 12px 4px; font-size: 16px; font-weight: 600; color: var(--pw-ink-800); text-decoration: none; border-bottom: 1px solid var(--pw-border-soft);">Projects</a>
+      <a href="#about" onclick="closeMenu()" style="padding: 12px 4px; font-size: 16px; font-weight: 600; color: var(--pw-ink-800); text-decoration: none; border-bottom: 1px solid var(--pw-border-soft);">About</a>
+      <a href="#contact" onclick="closeMenu()" style="padding: 12px 4px; font-size: 16px; font-weight: 600; color: var(--pw-ink-800); text-decoration: none; border-bottom: 1px solid var(--pw-border-soft);">Contact</a>
+      <a href="#contact" onclick="closeMenu()" class="btn-primary" style="margin-top: 12px; text-align: center; padding: 14px; font-size: 16px;">無料相談をする</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" style="position: relative; background: radial-gradient(120% 120% at 80% 0%, #12203B 0%, #0B1220 55%); color: #fff; overflow: hidden;">
+    <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none;">
+      <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; animation: pwDrift 9s var(--ease-in-out) infinite;">
+        <defs>
+          <linearGradient id="pwWave" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#3B82F6" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#60A5FA" stop-opacity="0.2"/>
+          </linearGradient>
+          <radialGradient id="pwGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <g stroke="#22325A" stroke-width="1" opacity="0.5">
+          <line x1="0" y1="140" x2="1200" y2="140"/>
+          <line x1="0" y1="290" x2="1200" y2="290"/>
+          <line x1="0" y1="440" x2="1200" y2="440"/>
+          <line x1="0" y1="590" x2="1200" y2="590"/>
+          <line x1="300" y1="0" x2="300" y2="700"/>
+          <line x1="600" y1="0" x2="600" y2="700"/>
+          <line x1="900" y1="0" x2="900" y2="700"/>
+        </g>
+        <circle cx="950" cy="180" r="320" fill="url(#pwGlow)"/>
+        <path d="M620 360 H760 C780 360 788 352 796 332 L824 262 L880 470 L936 192 L972 332 C980 352 988 360 1008 360 H1200"
+              fill="none" stroke="url(#pwWave)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+              stroke-dasharray="6 10" style="animation: pwDash 6s linear infinite;"/>
+        <path d="M560 470 H700 C716 470 724 464 732 448 L756 392 L800 560 L844 340 L876 452 C882 466 890 470 906 470 H1200"
+              fill="none" stroke="#2A6FE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+        <g fill="#60A5FA">
+          <circle cx="824" cy="262" r="4"/><circle cx="936" cy="192" r="5"/><circle cx="880" cy="470" r="4"/>
+          <circle cx="600" cy="290" r="3" opacity="0.7"/><circle cx="1008" cy="360" r="3" opacity="0.7"/>
+        </g>
+      </svg>
+      <div style="position: absolute; inset: 0; background: linear-gradient(90deg, #0B1220 0%, rgba(11,18,32,0.7) 38%, rgba(11,18,32,0) 70%);"></div>
+    </div>
+
+    <div style="position: relative; max-width: 1200px; margin: 0 auto; padding: clamp(64px,11vw,128px) clamp(20px,5vw,48px) clamp(72px,10vw,120px);">
+      <div style="max-width: 760px;">
+        <span class="pw-eyebrow" style="color: #7FB0FF;">AI IMPLEMENTATION PARTNER</span>
+        <h1 style="font-family: var(--font-jp); font-weight: 800; line-height: 1.18; letter-spacing: -0.02em; color: #fff; font-size: clamp(34px,6.4vw,64px); margin: 18px 0 0; text-wrap: balance;">AIを、事業を動かす<span style="color: var(--pw-blue-bright);">仕組み</span>に。</h1>
+        <p style="font-size: clamp(16px,1.7vw,20px); line-height: 1.8; color: #C7D2E5; margin: 24px 0 0; max-width: 620px;">Web制作、顧客獲得、採用、業務改善、AI研修まで。<br>PulseWorksは、生成AIを現場で使える成果へ変えます。</p>
+        <p style="font-size: clamp(14px,1.4vw,16px); line-height: 1.85; color: #93A3BE; margin: 16px 0 0; max-width: 600px;">構想だけで終わらせず、課題整理から設計・実装・改善・定着まで伴走します。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px;">
+          <a href="#contact" class="btn-primary" style="font-size: 16px; padding: 15px 28px;">無料相談をする</a>
+          <a href="#services" class="btn-ghost" style="font-size: 16px; padding: 15px 28px;">サービスを見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEMS ============ -->
+  <section style="background: var(--pw-surface-alt); padding: clamp(56px,8vw,96px) 0;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px);">
+      <span class="pw-eyebrow">CHALLENGES</span>
+      <h2 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(26px,4vw,38px); margin: 14px 0 0; max-width: 720px; text-wrap: balance;">AIを導入しただけでは、事業は変わらない。</h2>
+      <div style="display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 40px;">
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 24px; box-shadow: var(--shadow-card); display: flex; gap: 14px; align-items: flex-start;">
+          <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; margin-top: 9px; border-radius: 999px; background: var(--pw-blue-600);"></span>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--pw-ink-700); font-weight: 500;">AIを導入したが、現場で使われていない</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 24px; box-shadow: var(--shadow-card); display: flex; gap: 14px; align-items: flex-start;">
+          <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; margin-top: 9px; border-radius: 999px; background: var(--pw-blue-600);"></span>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--pw-ink-700); font-weight: 500;">Webサイトや採用ページを改善したいが、時間も人手も足りない</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 24px; box-shadow: var(--shadow-card); display: flex; gap: 14px; align-items: flex-start;">
+          <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; margin-top: 9px; border-radius: 999px; background: var(--pw-blue-600);"></span>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--pw-ink-700); font-weight: 500;">社内業務が属人化し、確認・転記・資料作成に時間がかかる</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 24px; box-shadow: var(--shadow-card); display: flex; gap: 14px; align-items: flex-start;">
+          <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; margin-top: 9px; border-radius: 999px; background: var(--pw-blue-600);"></span>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--pw-ink-700); font-weight: 500;">AIを使いたいが、何から始めるべきか分からない</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 24px; box-shadow: var(--shadow-card); display: flex; gap: 14px; align-items: flex-start;">
+          <span aria-hidden="true" style="flex: none; width: 8px; height: 8px; margin-top: 9px; border-radius: 999px; background: var(--pw-blue-600);"></span>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--pw-ink-700); font-weight: 500;">企画や構想はあるが、実装まで進まない</p>
+        </div>
+      </div>
+      <p style="margin: 32px 0 0; font-size: clamp(15px,1.6vw,18px); line-height: 1.8; color: var(--pw-ink-600); max-width: 760px;">PulseWorksは、AIを<strong style="color: var(--pw-ink-900); font-weight: 700;">"試すだけ"で終わらせず</strong>、成果につながる業務・顧客体験・仕組みに変えます。</p>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services" style="background: #fff; padding: clamp(64px,9vw,112px) 0; scroll-margin-top: 72px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px);">
+      <span class="pw-eyebrow">SERVICES</span>
+      <h2 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(28px,4.4vw,44px); margin: 14px 0 0;">Services</h2>
+      <p style="margin: 16px 0 0; font-size: clamp(15px,1.6vw,18px); line-height: 1.8; color: var(--pw-ink-600); max-width: 680px;">事業の前進を妨げるボトルネックを、AIと実装力で解消します。</p>
+
+      <div style="display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 44px;">
+
+        <!-- Service 1 -->
+        <article class="service-card">
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--pw-blue-50); display: flex; align-items: center; justify-content: center; flex: none;">
+            <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="pw-eyebrow" style="margin-top: 20px; display: block;">WEB &amp; RECRUITING</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 21px; line-height: 1.4; color: var(--pw-ink-900); margin: 8px 0 0;">AI Web・採用支援</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">事業理解、ターゲット設計、コピー、デザイン、実装まで。AIを活用しながら、伝わるWebサイトと採用導線を高速に形にします。</p>
+          <ul style="list-style: none; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px solid var(--pw-border-soft); display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>コーポレートサイト・サービスサイト</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>新規事業LP・採用LP</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Web導線・CV改善</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AI検索時代を見据えたWeb・コンテンツ診断</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>営業資料・提案資料制作</span></li>
+          </ul>
+          <a href="#contact" class="consult-link" style="margin-top: 24px;">詳しく相談する <span aria-hidden="true">→</span></a>
+        </article>
+
+        <!-- Service 2 -->
+        <article class="service-card">
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--pw-blue-50); display: flex; align-items: center; justify-content: center; flex: none;">
+            <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="pw-eyebrow" style="margin-top: 20px; display: block;">WORKFLOW &amp; CHATBOT</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 21px; line-height: 1.4; color: var(--pw-ink-900); margin: 8px 0 0;">AI業務改善・チャットボット</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">手作業、情報探索、問い合わせ対応、資料作成などを見直し、AIで回る業務フローを設計・実装します。</p>
+          <ul style="list-style: none; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px solid var(--pw-border-soft); display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>社内ナレッジ検索</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AIチャットボット</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>営業・提案書作成支援</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>議事録・タスク整理</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>小規模PoC・業務自動化</span></li>
+          </ul>
+          <a href="#contact" class="consult-link" style="margin-top: 24px;">詳しく相談する <span aria-hidden="true">→</span></a>
+        </article>
+
+        <!-- Service 3 -->
+        <article class="service-card">
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--pw-blue-50); display: flex; align-items: center; justify-content: center; flex: none;">
+            <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="#2563EB" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="pw-eyebrow" style="margin-top: 20px; display: block;">TRAINING &amp; ENABLEMENT</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 21px; line-height: 1.4; color: var(--pw-ink-900); margin: 8px 0 0;">AI研修・実践支援</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">AIを使える人が一部だけ、という状態から脱却。現場で使えるスキル・テンプレート・運用ルールを整えます。</p>
+          <ul style="list-style: none; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px solid var(--pw-border-soft); display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ChatGPT・Claude・Claude Code・Cursor活用</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>経営者・管理職向けAI活用設計</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>部門別ワークショップ</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>プロンプト・業務テンプレート作成</span></li>
+            <li style="display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.55; color: var(--pw-ink-700);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex: none; margin-top: 2px;"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>導入後の定着支援</span></li>
+          </ul>
+          <a href="#contact" class="consult-link" style="margin-top: 24px;">詳しく相談する <span aria-hidden="true">→</span></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY / APPROACH ============ -->
+  <section id="approach" style="background: var(--pw-surface-alt); padding: clamp(64px,9vw,112px) 0; scroll-margin-top: 72px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px);">
+      <span class="pw-eyebrow">WHY PULSEWORKS</span>
+      <h2 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(28px,4.4vw,44px); margin: 14px 0 0;">Why PulseWorks</h2>
+
+      <div style="display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 44px;">
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 28px; box-shadow: var(--shadow-card);">
+          <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--pw-blue-600); letter-spacing: 0.04em;">01</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 19px; line-height: 1.45; color: var(--pw-ink-900); margin: 10px 0 0;">課題から考える</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">ツールありきではなく、事業・顧客・現場の課題から設計します。</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 28px; box-shadow: var(--shadow-card);">
+          <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--pw-blue-600); letter-spacing: 0.04em;">02</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 19px; line-height: 1.45; color: var(--pw-ink-900); margin: 10px 0 0;">構想で終わらせない</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">戦略や資料だけで終わらず、実装・検証・改善まで進めます。</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 28px; box-shadow: var(--shadow-card);">
+          <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--pw-blue-600); letter-spacing: 0.04em;">03</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 19px; line-height: 1.45; color: var(--pw-ink-900); margin: 10px 0 0;">小さく速く試す</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">大きな導入前に、効果が出やすい領域からPoCを設計します。</p>
+        </div>
+        <div style="background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 28px; box-shadow: var(--shadow-card);">
+          <span style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--pw-blue-600); letter-spacing: 0.04em;">04</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 19px; line-height: 1.45; color: var(--pw-ink-900); margin: 10px 0 0;">仕組みとして定着させる</h3>
+          <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: var(--pw-ink-600);">納品で終わらせず、テンプレート・運用ルール・研修を通じて組織に残します。</p>
+        </div>
+      </div>
+
+      <!-- HOW WE WORK -->
+      <div style="margin-top: 64px;">
+        <span class="pw-eyebrow">HOW WE WORK</span>
+        <h3 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(24px,3.4vw,34px); margin: 14px 0 0;">進め方</h3>
+        <ol style="list-style: none; margin: 36px 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+          <li style="position: relative; background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 22px 20px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: #fff; background: var(--pw-ink-900); width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;">1</span>
+            <p style="margin: 14px 0 0; font-family: var(--font-jp); font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--pw-ink-900);">ヒアリング</p>
+          </li>
+          <li style="position: relative; background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 22px 20px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: #fff; background: var(--pw-ink-900); width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;">2</span>
+            <p style="margin: 14px 0 0; font-family: var(--font-jp); font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--pw-ink-900);">課題整理・優先順位設計</p>
+          </li>
+          <li style="position: relative; background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 22px 20px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: #fff; background: var(--pw-ink-900); width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;">3</span>
+            <p style="margin: 14px 0 0; font-family: var(--font-jp); font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--pw-ink-900);">企画・設計</p>
+          </li>
+          <li style="position: relative; background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 22px 20px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: #fff; background: var(--pw-ink-900); width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;">4</span>
+            <p style="margin: 14px 0 0; font-family: var(--font-jp); font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--pw-ink-900);">制作・実装・検証</p>
+          </li>
+          <li style="position: relative; background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 22px 20px;">
+            <span style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: #fff; background: var(--pw-ink-900); width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;">5</span>
+            <p style="margin: 14px 0 0; font-family: var(--font-jp); font-size: 15px; font-weight: 700; line-height: 1.5; color: var(--pw-ink-900);">改善・運用・定着支援</p>
+          </li>
+        </ol>
+        <p style="margin: 24px 0 0; font-size: 15px; line-height: 1.8; color: var(--pw-ink-600);">まずは、効果が出やすいテーマから小さく始めます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PULSEWORKS LAB / PROJECTS ============ -->
+  <section id="projects" style="background: #fff; padding: clamp(64px,9vw,112px) 0; scroll-margin-top: 72px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px);">
+      <span class="pw-eyebrow">PULSEWORKS LAB</span>
+      <h2 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(28px,4.4vw,44px); margin: 14px 0 0;">PulseWorks Lab</h2>
+      <p style="margin: 16px 0 0; font-size: clamp(15px,1.6vw,18px); line-height: 1.8; color: var(--pw-ink-600); max-width: 720px;">PulseWorks自身を実験場に、AIを活用した制作・業務改善・発信のベストプラクティスを検証しています。</p>
+      <div style="display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; background: var(--pw-blue-50); border: 1px solid var(--pw-blue-100); color: var(--pw-blue-700); font-size: 12.5px; font-weight: 700; padding: 7px 14px; border-radius: 999px;">
+        <span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 999px; background: var(--pw-blue-600);"></span>自主制作・実証プロジェクト
+      </div>
+
+      <div style="display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); margin-top: 36px;">
+        <div class="lab-card">
+          <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--pw-ink-400); letter-spacing: 0.04em;">WEB</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--pw-ink-900); margin: 0;">AI活用コーポレートサイト</h3>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--pw-ink-600);">事業理解からデザイン・実装までAIを取り入れた制作プロセスを検証。</p>
+        </div>
+        <div class="lab-card">
+          <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--pw-ink-400); letter-spacing: 0.04em;">RECRUITING</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--pw-ink-900); margin: 0;">採用LPデモプロジェクト</h3>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--pw-ink-600);">ターゲット設計とコピー生成を組み合わせた採用導線の試作。</p>
+        </div>
+        <div class="lab-card">
+          <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--pw-ink-400); letter-spacing: 0.04em;">CHATBOT</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--pw-ink-900); margin: 0;">AIチャットボット試作</h3>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--pw-ink-600);">社内ナレッジ検索と一次対応を想定した会話設計の検証。</p>
+        </div>
+        <div class="lab-card">
+          <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--pw-ink-400); letter-spacing: 0.04em;">DIAGNOSIS</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--pw-ink-900); margin: 0;">AIO診断レポート</h3>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--pw-ink-600);">AI検索時代を見据えたWeb・コンテンツの診断フォーマットを試作。</p>
+        </div>
+        <div class="lab-card">
+          <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--pw-ink-400); letter-spacing: 0.04em;">WORKFLOW</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--pw-ink-900); margin: 0;">営業資料・提案書生成ワークフロー</h3>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--pw-ink-600);">提案資料作成をAIで支援する業務フローの設計と検証。</p>
+        </div>
+        <div class="lab-card">
+          <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--pw-ink-400); letter-spacing: 0.04em;">CONTENT</span>
+          <h3 style="font-family: var(--font-jp); font-weight: 700; font-size: 17px; line-height: 1.5; color: var(--pw-ink-900); margin: 0;">SNS投稿テンプレート・制作フロー</h3>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.7; color: var(--pw-ink-600);">発信コンテンツの企画から制作までを型にする実験。</p>
+        </div>
+      </div>
+      <p style="margin: 28px 0 0; font-size: 14px; line-height: 1.8; color: var(--pw-ink-400);">公開可能なプロジェクトは順次追加予定です。</p>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" style="background: radial-gradient(120% 120% at 85% 0%, #12203B 0%, #0B1220 60%); color: #fff; padding: clamp(64px,9vw,112px) 0; scroll-margin-top: 72px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); display: grid; gap: 48px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start;">
+      <div>
+        <span class="pw-eyebrow" style="color: #7FB0FF;">ABOUT</span>
+        <h2 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: #fff; font-size: clamp(26px,4vw,40px); margin: 14px 0 0;">About PulseWorks</h2>
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 18px; max-width: 620px;">
+          <p style="margin: 0; font-size: clamp(15px,1.5vw,17px); line-height: 1.95; color: #C7D2E5;">PulseWorksは、生成AIを活用して、企業や個人の「次の一歩」を形にする会社です。</p>
+          <p style="margin: 0; font-size: clamp(15px,1.5vw,17px); line-height: 1.95; color: #C7D2E5;">AIは、導入するだけでは成果につながりません。事業の課題を整理し、業務や顧客体験に落とし込み、現場で使われ続ける仕組みにして初めて価値になります。</p>
+          <p style="margin: 0; font-size: clamp(15px,1.5vw,17px); line-height: 1.95; color: #C7D2E5;">私たちは、戦略・クリエイティブ・テクノロジーを横断しながら、構想から実装、改善まで伴走します。</p>
+        </div>
+      </div>
+
+      <div style="background: var(--pw-surface-dark-2); border: 1px solid var(--pw-border-dark); border-radius: 16px; padding: 32px;">
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <div aria-hidden="true" style="flex: none; width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, #2563EB, #0B1220); display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 22px; color: #fff; letter-spacing: 0.02em; box-shadow: var(--shadow-blue);">KO</div>
+          <div>
+            <p style="margin: 0; font-size: 12.5px; font-weight: 600; color: #7FB0FF; letter-spacing: 0.04em;">代表取締役 / CEO</p>
+            <p style="margin: 4px 0 0; font-family: var(--font-jp); font-size: 19px; font-weight: 700; color: #fff;">小塩 健介</p>
+            <p style="margin: 2px 0 0; font-size: 13px; color: #93A3BE;">Kensuke Ojio</p>
+          </div>
+        </div>
+        <p style="margin: 22px 0 0; font-size: 14px; line-height: 1.85; color: #B7C3D8;">経営コンサルティング領域での経験を基盤に、生成AIを活用した事業開発、Web制作、業務改善に取り組んでいます。構想を資料で終わらせず、顧客に届く形・現場で動く形まで落とし込むことを重視しています。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section style="background: #fff; padding: clamp(56px,8vw,96px) 0;">
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); text-align: center;">
+      <h2 style="font-family: var(--font-jp); font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(28px,4.6vw,46px); margin: 0; text-wrap: balance;">AI活用を、次の一手に。</h2>
+      <p style="margin: 20px auto 0; font-size: clamp(15px,1.6vw,18px); line-height: 1.85; color: var(--pw-ink-600); max-width: 600px;">課題がまだ曖昧でも大丈夫です。<br>Web制作、採用、業務改善、AI研修について、まずは状況をお聞かせください。</p>
+      <a href="#contact" class="btn-primary" style="display: inline-block; margin-top: 32px; font-size: 16px; padding: 16px 36px;">無料相談をする</a>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT FORM ============ -->
+  <section id="contact" style="background: var(--pw-surface-alt); padding: clamp(64px,9vw,112px) 0; scroll-margin-top: 72px;">
+    <div style="max-width: 760px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px);">
+      <div style="text-align: center;">
+        <span class="pw-eyebrow">CONTACT</span>
+        <h2 style="font-family: var(--font-jp); font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--pw-ink-900); font-size: clamp(26px,4vw,40px); margin: 14px 0 0;">無料相談をする</h2>
+        <p style="margin: 16px auto 0; font-size: 15px; line-height: 1.8; color: var(--pw-ink-600); max-width: 560px;">下記フォームよりお気軽にご相談ください。内容を確認のうえ、担当者よりご連絡いたします。</p>
+      </div>
+
+      <form id="contact-form" novalidate style="margin-top: 40px; background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: 16px; padding: clamp(24px,4vw,40px); box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 22px;">
+
+        <div style="display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="pw-name" style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800);">お名前 <span style="color: var(--pw-danger); font-weight: 700;">*</span></label>
+            <input id="pw-name" name="name" type="text" autocomplete="name" aria-required="true" placeholder="山田 太郎" class="pw-input">
+            <span id="err-name" class="field-error" role="alert"></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="pw-company" style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800);">会社名</label>
+            <input id="pw-company" name="company" type="text" autocomplete="organization" placeholder="株式会社〇〇" class="pw-input">
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="pw-email" style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800);">メールアドレス <span style="color: var(--pw-danger); font-weight: 700;">*</span></label>
+          <input id="pw-email" name="email" type="email" autocomplete="email" aria-required="true" placeholder="you@example.com" class="pw-input">
+          <span id="err-email" class="field-error" role="alert"></span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <label for="pw-message" style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800);">ご相談内容 <span style="color: var(--pw-danger); font-weight: 700;">*</span></label>
+          <textarea id="pw-message" name="message" rows="5" aria-required="true" placeholder="現在の課題や、相談したい内容をご記入ください。" class="pw-input"></textarea>
+          <span id="err-message" class="field-error" role="alert"></span>
+        </div>
+
+        <fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+          <legend style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800); padding: 0;">興味のある支援内容（複数選択可）</legend>
+          <div style="display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <label class="interest-label"><input type="checkbox" name="interest" value="AI Web・採用支援"><span>AI Web・採用支援</span></label>
+            <label class="interest-label"><input type="checkbox" name="interest" value="AI業務改善・チャットボット"><span>AI業務改善・チャットボット</span></label>
+            <label class="interest-label"><input type="checkbox" name="interest" value="AI研修・実践支援"><span>AI研修・実践支援</span></label>
+            <label class="interest-label"><input type="checkbox" name="interest" value="その他"><span>その他</span></label>
+          </div>
+        </fieldset>
+
+        <div style="display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="pw-budget" style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800);">予算感 <span style="color: var(--pw-ink-400); font-weight: 500;">（任意）</span></label>
+            <input id="pw-budget" name="budget" type="text" placeholder="例：30〜50万円 / 未定" class="pw-input">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <label for="pw-timing" style="font-size: 13.5px; font-weight: 600; color: var(--pw-ink-800);">希望時期 <span style="color: var(--pw-ink-400); font-weight: 500;">（任意）</span></label>
+            <input id="pw-timing" name="timing" type="text" placeholder="例：今四半期中 / 未定" class="pw-input">
+          </div>
+        </div>
+
+        <div id="form-status" class="form-status" role="status"></div>
+
+        <button type="submit" class="btn-submit">無料相談を申し込む</button>
+        <p style="margin: 0; font-size: 12.5px; line-height: 1.7; color: var(--pw-ink-400); text-align: center;">ご入力いただいた内容は、ご相談対応の目的にのみ利用します。<a href="privacy.html" style="color: var(--pw-blue-600); text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">プライバシーポリシー</a>をご確認ください。</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background: var(--pw-surface-dark); color: #fff; padding: clamp(48px,7vw,72px) 0 32px;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px);">
+      <div style="display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <svg width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="#3B82F6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span style="font-family: var(--font-sans); font-size: 20px; font-weight: 700; color: #fff;">PulseWorks</span>
+          </div>
+          <p style="margin: 16px 0 0; font-family: var(--font-jp); font-size: 14px; color: #93A3BE; line-height: 1.7;">AIを、事業を動かす仕組みに。</p>
+          <p style="margin: 8px 0 0; font-size: 13px; color: #6B7A95;">株式会社PulseWorks</p>
+        </div>
+        <nav aria-label="フッターナビゲーション" style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B7A95;">Site</span>
+          <a href="#services" class="footer-link">Services</a>
+          <a href="#about" class="footer-link">About</a>
+          <a href="#contact" class="footer-link">Contact</a>
+        </nav>
+        <nav aria-label="法務ナビゲーション" style="display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #6B7A95;">Legal</span>
+          <a href="privacy.html" class="footer-link">Privacy Policy</a>
+        </nav>
+      </div>
+      <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--pw-border-dark); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center;">
+        <span style="font-size: 12.5px; color: #6B7A95;">© PulseWorks Inc.</span>
+        <span style="font-size: 12.5px; color: #6B7A95;">PulseWorks Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    let menuOpen = false;
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      mobileNav.style.display = menuOpen ? 'flex' : 'none';
+      menuBtn.setAttribute('aria-expanded', menuOpen);
+    }
+
+    function closeMenu() {
+      menuOpen = false;
+      mobileNav.style.display = 'none';
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    // Contact form
+    const CONTACT_EMAIL = '';
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('form-status');
+    const errName = document.getElementById('err-name');
+    const errEmail = document.getElementById('err-email');
+    const errMessage = document.getElementById('err-message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = form.querySelector('[name="name"]').value.trim();
+      const company = form.querySelector('[name="company"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const message = form.querySelector('[name="message"]').value.trim();
+      const budget = form.querySelector('[name="budget"]').value.trim();
+      const timing = form.querySelector('[name="timing"]').value.trim();
+      const interests = [...form.querySelectorAll('[name="interest"]:checked')].map(cb => cb.value);
+
+      let hasError = false;
+
+      if (!name) {
+        errName.textContent = 'お名前をご入力ください。';
+        errName.style.display = 'block';
+        hasError = true;
+      } else {
+        errName.style.display = 'none';
+      }
+
+      if (!email) {
+        errEmail.textContent = 'メールアドレスをご入力ください。';
+        errEmail.style.display = 'block';
+        hasError = true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEmail.textContent = 'メールアドレスの形式をご確認ください。';
+        errEmail.style.display = 'block';
+        hasError = true;
+      } else {
+        errEmail.style.display = 'none';
+      }
+
+      if (!message) {
+        errMessage.textContent = 'ご相談内容をご入力ください。';
+        errMessage.style.display = 'block';
+        hasError = true;
+      } else {
+        errMessage.style.display = 'none';
+      }
+
+      if (hasError) {
+        showStatus('error', '未入力の項目があります。ご確認ください。');
+        return;
+      }
+
+      if (CONTACT_EMAIL) {
+        const lines = [
+          'お名前: ' + name,
+          '会社名: ' + (company || '（未記入）'),
+          'メールアドレス: ' + email,
+          '興味のある支援内容: ' + (interests.length ? interests.join(' / ') : '（未選択）'),
+          '予算感: ' + (budget || '（未記入）'),
+          '希望時期: ' + (timing || '（未記入）'),
+          '',
+          'ご相談内容:',
+          message,
+        ];
+        const subject = '【無料相談のお問い合わせ】' + (company ? company + ' / ' : '') + name + ' 様';
+        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+        showStatus('success', 'メールソフトを起動しました。内容をご確認のうえ、そのまま送信してください。');
+      } else {
+        showStatus('info', 'お問い合わせ先は現在準備中です。後ほど改めてご案内します。');
+      }
+    });
+
+    function showStatus(type, text) {
+      statusEl.textContent = text;
+      statusEl.style.display = 'block';
+      if (type === 'error') {
+        statusEl.style.background = '#FEF2F2';
+        statusEl.style.color = '#B91C1C';
+        statusEl.style.borderColor = '#FECACA';
+      } else if (type === 'success') {
+        statusEl.style.background = '#ECFDF5';
+        statusEl.style.color = '#047857';
+        statusEl.style.borderColor = '#A7F3D0';
+      } else {
+        statusEl.style.background = '#EFF4FF';
+        statusEl.style.color = '#1D4ED8';
+        statusEl.style.borderColor = '#BFD2FE';
+      }
+    }
+  </script>
+</body>
+</html>
