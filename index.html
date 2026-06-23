@@ -4,17 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>株式会社PulseWorks | AIを、事業を動かす仕組みに。</title>
-  <meta name="description" content="PulseWorksは、AI Web制作・採用支援・業務改善・AI研修を通じて、生成AIを事業成果につながる実装へ変えます。課題整理から設計・実装・定着まで伴走します。">
+  <meta name="description" content="PulseWorksは、生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて、企業の事業成長を支援します。">
   <link rel="canonical" href="https://pulseworks.co.jp/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="株式会社PulseWorks">
   <meta property="og:title" content="株式会社PulseWorks | AIを、事業を動かす仕組みに。">
-  <meta property="og:description" content="AI Web制作・採用支援・業務改善・AI研修。構想から設計・実装・改善・定着まで伴走します。">
+  <meta property="og:description" content="生成AIを現場で使える成果へ。課題整理から設計・実装・改善・定着まで伴走します。">
   <meta property="og:url" content="https://pulseworks.co.jp/">
   <meta property="og:image" content="https://pulseworks.co.jp/assets/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="株式会社PulseWorks | AIを、事業を動かす仕組みに。">
-  <meta name="twitter:description" content="AI Web制作・採用支援・業務改善・AI研修。構想から設計・実装・改善・定着まで伴走します。">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="assets/colors_and_type.css">
   <script type="application/ld+json">
@@ -47,236 +45,214 @@
   }
   </script>
   <style>
-    /* ===== BASE ===== */
+    /* === BASE === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-sans); color: var(--pw-ink-600); background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { font-family: var(--font-sans); color: #1F2937; background: #FBFCFE; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+    ::selection { background: rgba(96,140,250,.30); }
 
-    /* ===== ANIMATIONS ===== */
-    @keyframes pwDash { to { stroke-dashoffset: -500; } }
-    @keyframes dotBlink { 0%,100% { opacity: 0.9; } 50% { opacity: 0.3; } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    /* accent tokens */
+    :root { --ac: #608CFA; --ac-strong: #3B6BF5; --ac-ink: #0B1220; --paper: #FBFCFE; }
 
+    /* === ANIMATIONS === */
+    @keyframes pwNode { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
     }
 
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out); }
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s var(--ease-out), transform .65s var(--ease-out); }
     .reveal.visible { opacity: 1; transform: none; }
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.2s; }
-    .reveal-d3 { transition-delay: 0.3s; }
-    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d1 { transition-delay: .1s; } .reveal-d2 { transition-delay: .2s; } .reveal-d3 { transition-delay: .3s; }
 
-    /* ===== HEADER ===== */
-    #site-header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--pw-border-subtle);
-      transition: box-shadow var(--dur-slow) var(--ease-out);
-    }
-    #site-header.scrolled { box-shadow: var(--shadow-sm); }
-    .hdr { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .logo-link { display: flex; align-items: center; flex: none; text-decoration: none; }
-    .logo-link img { height: 24px; width: auto; display: block; }
+    /* === HEADER === */
+    #site-header { position: sticky; top: 0; z-index: 60; background: rgba(11,18,32,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .hdr { max-width: 1240px; margin: 0 auto; padding: 16px clamp(20px,5vw,56px); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo-wrap { display: flex; align-items: center; gap: 11px; flex: none; text-decoration: none; }
+    .logo-name { font-size: 18px; font-weight: 700; letter-spacing: -.01em; color: #fff; }
 
-    #desktop-nav { display: flex; align-items: center; gap: clamp(10px,1.6vw,26px); }
-    .nav-link { font-size: 14px; font-weight: 600; color: var(--pw-ink-700); text-decoration: none; position: relative; padding-bottom: 2px; }
-    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--pw-blue-600); transition: width var(--dur-base) var(--ease-out); border-radius: 2px; }
-    .nav-link:hover { color: var(--pw-blue-600); }
-    .nav-link:hover::after { width: 100%; }
-
-    .btn-hdr { display: inline-flex; align-items: center; font-size: 13.5px; font-weight: 700; color: #fff; background: var(--pw-blue-600); padding: 9px 18px; border-radius: var(--r-btn); text-decoration: none; white-space: nowrap; box-shadow: 0 2px 8px rgba(37,99,235,.3); transition: all var(--dur-base) var(--ease-out); }
-    .btn-hdr:hover { background: var(--pw-blue-700); color: #fff; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,.4); }
+    #desktop-nav { display: flex; align-items: center; gap: clamp(20px,2.6vw,40px); }
+    .nav-link-dark { font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; letter-spacing: .02em; color: rgba(255,255,255,.74); text-decoration: none; transition: color var(--dur-base) var(--ease-out); }
+    .nav-link-dark:hover { color: #fff; }
+    .hdr-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--ac-ink); background: var(--ac); padding: 10px 18px; border-radius: var(--r-btn); text-decoration: none; transition: background var(--dur-base) var(--ease-out); }
+    .hdr-cta:hover { background: #fff; }
 
     #menu-btn { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
-    #menu-btn span { display: block; width: 22px; height: 2px; background: var(--pw-ink-900); border-radius: 2px; }
-    #mobile-nav { display: none; flex-direction: column; border-top: 1px solid var(--pw-border-subtle); background: #fff; padding: 12px clamp(20px,5vw,48px) 20px; }
-    .mnav-link { padding: 13px 0; font-size: 16px; font-weight: 600; color: var(--pw-ink-800); text-decoration: none; border-bottom: 1px solid var(--pw-border-soft); display: block; }
-    .mnav-cta { display: block; margin-top: 16px; background: var(--pw-blue-600); color: #fff; font-size: 16px; font-weight: 700; text-align: center; padding: 14px; border-radius: var(--r-btn); text-decoration: none; }
+    #menu-btn span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
+    #mobile-nav { display: none; flex-direction: column; border-top: 1px solid rgba(255,255,255,.08); background: #0B1220; padding: 8px clamp(20px,5vw,56px) 22px; gap: 2px; }
+    .mnav-link { padding: 13px 4px; font-size: 16px; font-weight: 600; color: rgba(255,255,255,.9); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.07); display: block; }
+    .mnav-cta { display: block; margin-top: 14px; text-align: center; padding: 15px; font-size: 16px; font-weight: 600; color: var(--ac-ink); background: var(--ac); border-radius: var(--r-btn); text-decoration: none; }
 
-    @media (max-width: 879px) { #desktop-nav { display: none !important; } #menu-btn { display: flex !important; } }
+    @media (max-width: 919px) { #desktop-nav { display: none !important; } #menu-btn { display: flex !important; } }
 
-    /* ===== BUTTONS ===== */
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: #fff; background: var(--pw-blue-600); border-radius: var(--r-btn); text-decoration: none; padding: 15px 28px; box-shadow: var(--shadow-blue); transition: all var(--dur-base) var(--ease-out); }
-    .btn-primary:hover { background: var(--pw-blue-700); color: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,99,235,.4); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; color: #fff; border: 1.5px solid rgba(255,255,255,.35); border-radius: var(--r-btn); text-decoration: none; padding: 14px 28px; background: rgba(255,255,255,.06); transition: all var(--dur-base) var(--ease-out); }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.12); color: #fff; }
-    .btn-arrow { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--pw-blue-600); text-decoration: none; transition: gap var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out); }
-    .btn-arrow:hover { gap: 10px; color: var(--pw-blue-700); }
+    /* === HERO === */
+    #hero { position: relative; background: #0B1220; color: #fff; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .hero-inner { position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; padding: clamp(72px,12vw,150px) clamp(20px,5vw,56px) clamp(76px,11vw,140px); }
+    .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+    .hero-eyebrow-line { width: 30px; height: 1px; background: var(--ac); }
+    .hero-eyebrow-text { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--ac); }
+    .hero-h1 { font-family: var(--font-jp); font-weight: 800; line-height: 1.16; letter-spacing: -.025em; color: #fff; font-size: clamp(38px,7vw,76px); margin: 0; }
+    .hero-h1 em { font-style: normal; color: var(--ac); }
+    .hero-sub { font-size: clamp(16px,1.7vw,20px); line-height: 1.85; color: #B7C3D8; margin: 32px 0 0; max-width: 600px; }
+    .hero-note { font-size: 15px; line-height: 1.9; color: #7E8BA5; margin: 18px 0 0; max-width: 560px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 42px; }
+    .hero-btn-primary { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: var(--ac-ink); background: var(--ac); padding: 16px 30px; border-radius: var(--r-btn); text-decoration: none; font-family: var(--font-mono); transition: all var(--dur-base) var(--ease-out); }
+    .hero-btn-primary:hover { background: #fff; transform: translateY(-2px); }
+    .hero-btn-ghost { display: inline-flex; align-items: center; font-size: 16px; font-weight: 600; color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.2); padding: 16px 30px; border-radius: var(--r-btn); text-decoration: none; transition: all var(--dur-base) var(--ease-out); }
+    .hero-btn-ghost:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.04); }
+    .hero-footer { margin-top: clamp(56px,8vw,104px); padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); display: grid; gap: 12px 40px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .hero-domain { display: flex; align-items: baseline; gap: 14px; }
+    .hero-domain-n { font-family: var(--font-mono); font-size: 12px; color: var(--ac); font-weight: 500; }
+    .hero-domain-title { font-size: 15px; font-weight: 600; color: #fff; margin: 0; }
+    .hero-domain-sub { margin: 4px 0 0; font-size: 13px; color: #7E8BA5; line-height: 1.6; }
 
-    /* ===== SHARED LAYOUT ===== */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); }
-    .sec-pad { padding: clamp(64px,9vw,112px) 0; }
+    /* === SHARED === */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px,5vw,56px); }
+    .sec-pad { padding: clamp(72px,10vw,128px) 0; }
+    .mono-label { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+    .mono-label-line { width: 24px; height: 1px; }
+    .mono-label-text { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
+    .ink .mono-label-line { background: #0B1220; }
+    .ink .mono-label-text { color: #0B1220; }
+    .light-label .mono-label-line { background: var(--ac); }
+    .light-label .mono-label-text { color: var(--ac); }
+    .muted-label .mono-label-line { background: #7E8BA5; }
+    .muted-label .mono-label-text { color: #7E8BA5; }
 
-    .sec-label { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--pw-blue-600); }
-    .sec-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--pw-blue-600); border-radius: 2px; }
-    .sec-label-light { color: #7FB0FF; }
-    .sec-label-light::before { background: #7FB0FF; }
+    /* === PROBLEMS === */
+    #problems { background: var(--paper); }
+    .prob-grid { display: grid; gap: clamp(32px,5vw,72px); grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); align-items: start; }
+    @media (max-width: 760px) { .prob-grid { grid-template-columns: 1fr; } .prob-sticky { position: static !important; } }
+    .prob-sticky { position: sticky; top: 100px; }
+    .prob-h2 { font-family: var(--font-jp); font-weight: 800; line-height: 1.32; letter-spacing: -.02em; color: #0B1220; font-size: clamp(26px,3.6vw,40px); margin: 0; }
+    .prob-body { margin: 28px 0 0; font-size: 15px; line-height: 1.9; color: #4B5563; max-width: 380px; }
+    .prob-list { list-style: none; }
+    .prob-item { display: flex; gap: 22px; align-items: baseline; padding: 22px 0; border-top: 1px solid var(--pw-border-subtle); }
+    .prob-n { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--ac-strong); flex: none; padding-top: 2px; }
+    .prob-text { margin: 0; font-size: clamp(16px,1.7vw,19px); line-height: 1.6; color: var(--pw-ink-800); font-weight: 500; letter-spacing: -.01em; }
 
-    .sec-h2 { font-family: var(--font-jp); font-weight: 700; font-size: clamp(28px,4vw,42px); line-height: 1.22; letter-spacing: -.022em; color: var(--pw-ink-900); margin-top: 14px; }
-    .sec-h2-light { color: #fff; }
-    .sec-lead { margin-top: 16px; font-size: clamp(15px,1.5vw,17px); line-height: 1.85; color: var(--pw-ink-600); max-width: 680px; }
-    .sec-lead-light { color: #B8C8DF; }
+    /* === SERVICES === */
+    #services { background: #fff; border-top: 1px solid var(--pw-border-subtle); scroll-margin-top: 76px; }
+    .svc-header { display: grid; gap: 24px 56px; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); align-items: end; margin-bottom: clamp(48px,6vw,80px); }
+    .svc-h2 { font-family: var(--font-jp); font-weight: 800; line-height: 1.2; letter-spacing: -.025em; color: #0B1220; font-size: clamp(30px,4.6vw,52px); margin: 0; }
+    .svc-lead { font-size: clamp(15px,1.6vw,17px); line-height: 1.9; color: #4B5563; max-width: 420px; margin: 0; }
+    .svc-row { display: grid; gap: 28px 56px; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); padding: clamp(36px,4.5vw,56px) 0; border-top: 1px solid var(--pw-border-subtle); }
+    @media (max-width: 700px) { .svc-row { grid-template-columns: 1fr; } }
+    .svc-num { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--ac-strong); }
+    .svc-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--pw-ink-400); }
+    .svc-h3 { font-family: var(--font-jp); font-weight: 700; font-size: clamp(22px,2.8vw,30px); line-height: 1.38; letter-spacing: -.02em; color: #0B1220; margin: 18px 0 0; }
+    .svc-desc { margin: 18px 0 0; font-size: 15px; line-height: 1.88; color: #4B5563; max-width: 380px; }
+    .svc-cta { margin-top: 26px; font-size: 14px; font-weight: 600; color: var(--ac-strong); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); transition: gap var(--dur-base) var(--ease-out); }
+    .svc-cta:hover { gap: 12px; }
+    .svc-items { list-style: none; display: grid; gap: 0; align-content: start; }
+    .svc-item { display: flex; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--pw-border-soft); font-size: 15px; line-height: 1.55; color: var(--pw-ink-700); }
+    .svc-item-key { font-family: var(--font-mono); font-size: 11px; color: var(--ac-strong); flex: none; }
 
-    /* ===== HERO ===== */
-    #hero { background: #080F1D; color: #fff; padding: clamp(80px,12vw,140px) 0 clamp(80px,10vw,120px); position: relative; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; pointer-events: none; }
-    .hero-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-    @media (max-width: 840px) { .hero-inner { grid-template-columns: 1fr; } .hero-visual { display: none; } }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #7FB0FF; }
-    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--pw-blue-bright); border-radius: 2px; }
-    .hero-h1 { font-family: var(--font-jp); font-weight: 800; font-size: clamp(36px,5.8vw,66px); line-height: 1.16; letter-spacing: -.025em; color: #fff; margin-top: 20px; }
-    .hero-h1 em { font-style: normal; color: var(--pw-blue-bright); }
-    .hero-sub { font-size: clamp(16px,1.7vw,19px); line-height: 1.85; color: #B8C8DF; margin-top: 22px; max-width: 540px; }
-    .hero-note { font-size: 14px; line-height: 1.9; color: #718EA8; margin-top: 12px; max-width: 520px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
-    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    /* === WHY / APPROACH === */
+    #approach { position: relative; background: #0B1220; color: #fff; overflow: hidden; scroll-margin-top: 76px; }
+    .approach-bg { position: absolute; inset: 0; pointer-events: none; opacity: .5; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%); -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%); }
+    .why-h2 { font-family: var(--font-jp); font-weight: 800; line-height: 1.24; letter-spacing: -.025em; color: #fff; font-size: clamp(30px,4.6vw,52px); margin: 0; }
+    .why-grid { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(248px,1fr)); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.08); border-radius: 4px; overflow: hidden; margin-top: clamp(48px,6vw,80px); }
+    .why-cell { background: #0B1220; padding: clamp(28px,3.2vw,40px) clamp(24px,2.6vw,34px); display: flex; flex-direction: column; min-height: 230px; transition: background var(--dur-base) var(--ease-out); }
+    .why-cell:hover { background: #0E1729; }
+    .why-n { font-family: var(--font-mono); font-size: 28px; font-weight: 400; color: var(--ac); letter-spacing: -.02em; }
+    .why-title { font-family: var(--font-jp); font-weight: 700; font-size: 19px; line-height: 1.45; color: #fff; margin: 24px 0 0; }
+    .why-desc { margin: 14px 0 0; font-size: 14px; line-height: 1.85; color: #93A3BE; }
+    /* process */
+    .proc-label { display: flex; align-items: center; gap: 12px; margin-bottom: 36px; }
+    .proc-label-text { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #7E8BA5; }
+    .proc-label-line { flex: 1; height: 1px; background: rgba(255,255,255,.1); }
+    .proc-grid { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); background: rgba(255,255,255,.06); }
+    .proc-cell { background: #0B1220; padding: 22px 20px 26px; }
+    .proc-n { font-family: var(--font-mono); font-size: 12px; color: var(--ac); }
+    .proc-title { margin: 16px 0 0; font-family: var(--font-jp); font-size: 15px; font-weight: 700; line-height: 1.5; color: #fff; }
+    .proc-note { margin: 28px 0 0; font-size: 14.5px; line-height: 1.8; color: #93A3BE; }
 
-    /* ===== VALUE ===== */
-    #value { background: var(--pw-surface-alt); }
-    .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px 80px; align-items: start; margin-top: 40px; }
-    @media (max-width: 760px) { .value-grid { grid-template-columns: 1fr; gap: 36px; } }
-    .vflow-item { display: flex; gap: 20px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--pw-border-subtle); }
-    .vflow-item:last-child { border-bottom: none; }
-    .vflow-num { flex: none; width: 36px; height: 36px; border-radius: 999px; background: var(--pw-ink-900); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: #fff; }
-    .vflow-num.accent { background: var(--pw-blue-600); }
-    .vflow-h4 { font-family: var(--font-jp); font-weight: 700; font-size: 16px; color: var(--pw-ink-900); line-height: 1.4; }
-    .vflow-p { margin-top: 5px; font-size: 13.5px; line-height: 1.75; color: var(--pw-ink-500); }
+    /* === PROJECTS / LAB === */
+    #projects { background: var(--paper); scroll-margin-top: 76px; }
+    .lab-header { display: grid; gap: 24px 56px; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); align-items: end; margin-bottom: clamp(40px,5vw,64px); }
+    .lab-h2 { font-family: var(--font-jp); font-weight: 800; line-height: 1.24; letter-spacing: -.025em; color: #0B1220; font-size: clamp(28px,4vw,46px); margin: 0; }
+    .lab-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; border: 1px solid var(--pw-border-strong); color: var(--pw-ink-600); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 7px 13px; border-radius: var(--r-pill); }
+    .lab-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--ac-strong); }
+    .lab-table { border-top: 1px solid var(--pw-border-subtle); }
+    .lab-row { display: grid; gap: 8px 40px; grid-template-columns: 56px minmax(0,1fr) minmax(0,1.1fr) auto; align-items: center; padding: 22px 8px; border-bottom: 1px solid var(--pw-border-subtle); text-decoration: none; transition: background var(--dur-base) var(--ease-out); }
+    @media (max-width: 640px) { .lab-row { grid-template-columns: 40px 1fr auto; } .lab-row-desc { display: none; } }
+    .lab-row:hover { background: #fff; }
+    .lab-n { font-family: var(--font-mono); font-size: 12px; color: var(--pw-ink-400); }
+    .lab-title { font-family: var(--font-jp); font-size: clamp(16px,1.7vw,19px); font-weight: 700; color: #0B1220; letter-spacing: -.01em; }
+    .lab-desc { font-size: 13.5px; line-height: 1.6; color: #6B7280; }
+    .lab-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--ac-strong); justify-self: end; white-space: nowrap; }
 
-    /* ===== SERVICES ===== */
-    #services { background: #fff; scroll-margin-top: 80px; }
-    .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
-    .svc-card { border: 1px solid var(--pw-border-subtle); border-radius: var(--r-lg); padding: 32px; background: #fff; display: flex; flex-direction: column; box-shadow: var(--shadow-card); transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out); }
-    .svc-card:hover { border-color: var(--pw-blue-200); box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-    .svc-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--pw-blue-50); display: flex; align-items: center; justify-content: center; flex: none; }
-    .svc-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--pw-blue-600); margin-top: 18px; display: block; }
-    .svc-h3 { font-family: var(--font-jp); font-weight: 700; font-size: 20px; line-height: 1.45; color: var(--pw-ink-900); margin-top: 8px; }
-    .svc-tagline { font-size: 13.5px; font-weight: 600; color: var(--pw-ink-600); margin-top: 8px; line-height: 1.6; font-style: italic; }
-    .svc-desc { margin-top: 12px; font-size: 14px; line-height: 1.8; color: var(--pw-ink-600); flex: 1; }
-    .svc-list { list-style: none; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--pw-border-soft); display: flex; flex-direction: column; gap: 9px; }
-    .svc-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.55; color: var(--pw-ink-700); }
-    .svc-list svg { flex: none; margin-top: 2px; }
-    .svc-who { margin-top: 18px; font-size: 12.5px; line-height: 1.65; color: var(--pw-ink-500); padding: 12px; border-radius: var(--r-sm); background: var(--pw-surface-alt); }
-    .svc-who strong { color: var(--pw-ink-800); font-weight: 600; }
-
-    /* ===== WHY ===== */
-    #why { background: #080F1D; scroll-margin-top: 80px; }
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; margin-top: 48px; border: 1px solid #1A2B4A; border-radius: var(--r-lg); overflow: hidden; }
-    .why-item { padding: 36px 32px; background: #0D1728; transition: background var(--dur-base) var(--ease-out); }
-    .why-item:hover { background: #121F38; }
-    .why-num { font-family: var(--font-mono); font-size: 48px; font-weight: 700; color: #162440; line-height: 1; letter-spacing: -.02em; }
-    .why-h3 { font-family: var(--font-jp); font-weight: 700; font-size: 18px; line-height: 1.4; color: #fff; margin-top: 16px; }
-    .why-p { margin-top: 10px; font-size: 14px; line-height: 1.8; color: #7A90B0; }
-
-    /* ===== PROCESS ===== */
-    #process { background: #fff; }
-    .proc-steps { display: flex; gap: 0; margin-top: 48px; position: relative; }
-    .proc-step { flex: 1; min-width: 0; position: relative; padding-right: 20px; }
-    .proc-step::after { content: ''; position: absolute; top: 19px; left: 40px; right: 0; height: 2px; background: linear-gradient(90deg, var(--pw-blue-600) 0%, var(--pw-ink-100) 100%); }
-    .proc-step:last-child::after { display: none; }
-    .proc-num { position: relative; z-index: 1; width: 40px; height: 40px; border-radius: 999px; background: var(--pw-ink-900); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #fff; flex: none; }
-    .proc-num.hi { background: var(--pw-blue-600); }
-    .proc-body { margin-top: 16px; padding-right: 8px; }
-    .proc-title { font-family: var(--font-jp); font-weight: 700; font-size: 14px; color: var(--pw-ink-900); line-height: 1.4; }
-    .proc-desc { margin-top: 7px; font-size: 12.5px; line-height: 1.75; color: var(--pw-ink-500); }
-    .proc-note { margin-top: 36px; display: inline-flex; align-items: center; gap: 10px; background: var(--pw-blue-50); border: 1px solid var(--pw-blue-100); padding: 14px 20px; border-radius: var(--r-md); font-size: 14px; font-weight: 600; color: var(--pw-blue-800); }
-    @media (max-width: 700px) {
-      .proc-steps { flex-direction: column; gap: 0; }
-      .proc-step { padding: 0 0 28px 56px; min-width: unset; }
-      .proc-step::after { top: 0; left: 19px; right: auto; width: 2px; height: 100%; background: linear-gradient(180deg, var(--pw-blue-600), var(--pw-ink-100)); }
-      .proc-num { position: absolute; left: 0; top: 0; }
-      .proc-body { margin-top: 0; padding-right: 0; }
-    }
-
-    /* ===== LAB ===== */
-    #projects { background: var(--pw-surface-alt); scroll-margin-top: 80px; }
-    .lab-badge { display: inline-flex; align-items: center; gap: 7px; background: var(--pw-blue-50); border: 1px solid var(--pw-blue-100); color: var(--pw-blue-700); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 999px; margin-top: 14px; }
-    .lab-badge::before { content: ''; width: 7px; height: 7px; border-radius: 999px; background: var(--pw-blue-600); }
-    .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-top: 32px; }
-    .lab-card { background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-md); padding: 26px 24px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-card); transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
-    .lab-card:hover { border-color: var(--pw-blue-200); box-shadow: var(--shadow-md); }
-    .lab-type { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--pw-ink-400); }
-    .lab-title { font-family: var(--font-jp); font-weight: 700; font-size: 16px; line-height: 1.5; color: var(--pw-ink-900); }
-    .lab-desc { font-size: 13px; line-height: 1.75; color: var(--pw-ink-600); flex: 1; }
-    .lab-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; color: var(--pw-ink-400); margin-top: 8px; }
-    .lab-status::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--pw-ink-300); }
-    .lab-status.live { color: var(--pw-blue-600); }
-    .lab-status.live::before { background: var(--pw-blue-600); animation: dotBlink 2s infinite; }
-
-    /* ===== ABOUT ===== */
-    #about { background: #080F1D; scroll-margin-top: 80px; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; margin-top: 48px; }
+    /* === ABOUT === */
+    #about { background: #0B1220; color: #fff; scroll-margin-top: 76px; }
+    .about-grid { display: grid; gap: clamp(40px,5vw,80px); grid-template-columns: minmax(0,1fr) minmax(0,.95fr); align-items: start; }
     @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
-    .about-meta { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; padding-top: 28px; border-top: 1px solid #1A2B4A; }
-    .about-meta-row { display: flex; gap: 16px; font-size: 14px; }
-    .about-meta-key { color: #4C5F7A; min-width: 80px; font-weight: 600; flex: none; }
-    .about-meta-val { color: #B8C8DF; }
-    .founder-card { background: #0D1728; border: 1px solid #1A2B4A; border-radius: var(--r-xl); padding: 36px 32px; }
-    .founder-avatar { width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, #1D4ED8, #0B1220); display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 800; font-size: 24px; color: #fff; box-shadow: var(--shadow-blue); }
-    .founder-name { font-family: var(--font-jp); font-weight: 700; font-size: 22px; color: #fff; margin-top: 16px; }
-    .founder-name-en { font-size: 13px; color: #7A90B0; margin-top: 2px; }
-    .founder-role { font-size: 12.5px; font-weight: 700; color: #7FB0FF; letter-spacing: .05em; margin-top: 4px; }
-    .founder-bio { margin-top: 22px; font-size: 14px; line-height: 1.9; color: #B0C0D8; border-top: 1px solid #1A2B4A; padding-top: 20px; }
-    .founder-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .founder-tag { font-size: 11.5px; font-weight: 600; color: #7A90B0; border: 1px solid #1A2B4A; padding: 5px 12px; border-radius: 999px; }
+    .about-h2 { font-family: var(--font-jp); font-weight: 800; line-height: 1.3; letter-spacing: -.025em; color: #fff; font-size: clamp(26px,3.6vw,40px); margin: 0; }
+    .about-p { font-size: clamp(15px,1.5vw,17px); line-height: 1.95; margin: 0; }
+    .founder-card { border: 1px solid rgba(255,255,255,.1); border-radius: 8px; overflow: hidden; background: #0E1729; }
+    .founder-header { padding: clamp(28px,3vw,40px); display: flex; align-items: center; gap: 22px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .founder-avatar { flex: none; width: 76px; height: 76px; border-radius: 14px; background: linear-gradient(150deg,#1B2C4E,#0B1220); border: 1px solid rgba(255,255,255,.12); display: flex; align-items: center; justify-content: center; position: relative; }
+    .founder-initials { font-family: var(--font-mono); font-weight: 600; font-size: 26px; color: #fff; letter-spacing: .02em; }
+    .founder-dot { position: absolute; bottom: -1px; right: -1px; width: 18px; height: 18px; border-radius: 999px; background: var(--ac); border: 3px solid #0E1729; }
+    .founder-role { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ac); margin: 0; }
+    .founder-name-jp { font-family: var(--font-jp); font-size: 21px; font-weight: 700; color: #fff; margin: 8px 0 0; }
+    .founder-name-en { font-family: var(--font-mono); font-size: 12.5px; color: #7E8BA5; margin: 3px 0 0; }
+    .founder-bio { margin: 0; padding: clamp(24px,3vw,34px); font-size: 14.5px; line-height: 1.95; color: #B7C3D8; }
 
-    /* ===== FAQ ===== */
-    #faq { background: #fff; scroll-margin-top: 80px; }
-    .faq-list { max-width: 760px; margin: 44px auto 0; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-lg); overflow: hidden; }
-    .faq-item { border-bottom: 1px solid var(--pw-border-subtle); }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-btn { width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: none; border: none; cursor: pointer; padding: 20px 28px; font-family: var(--font-jp); font-size: 15px; font-weight: 600; color: var(--pw-ink-900); line-height: 1.45; }
-    .faq-btn:hover { background: var(--pw-surface-alt); }
-    .faq-icon { flex: none; width: 24px; height: 24px; border-radius: 999px; border: 1.5px solid var(--pw-border-strong); display: flex; align-items: center; justify-content: center; transition: all var(--dur-base) var(--ease-out); }
-    .faq-icon svg { transition: transform var(--dur-base) var(--ease-out); }
-    .faq-item.open .faq-icon { background: var(--pw-blue-600); border-color: var(--pw-blue-600); }
-    .faq-item.open .faq-icon svg { transform: rotate(45deg); }
-    .faq-item.open .faq-icon path { stroke: #fff; }
-    .faq-answer { display: none; padding: 0 28px 20px; font-size: 14.5px; line-height: 1.85; color: var(--pw-ink-600); }
-    .faq-item.open .faq-answer { display: block; }
-
-    /* ===== CONTACT ===== */
-    #contact { background: var(--pw-surface-alt); scroll-margin-top: 80px; }
-    .contact-wrap { max-width: 700px; margin: 0 auto; padding: 0 clamp(20px,5vw,48px); }
-    .contact-form-card { background: #fff; border: 1px solid var(--pw-border-subtle); border-radius: var(--r-xl); padding: clamp(28px,5vw,48px); box-shadow: var(--shadow-md); margin-top: 40px; }
-    .form-fields { display: flex; flex-direction: column; gap: 20px; }
-    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .form-field { display: flex; flex-direction: column; gap: 7px; }
-    .form-label { font-size: 13px; font-weight: 600; color: var(--pw-ink-800); display: flex; align-items: center; gap: 5px; }
-    .req { color: var(--pw-blue-600); font-weight: 700; }
-    .opt { color: var(--pw-ink-400); font-weight: 400; font-size: 12px; }
-    .pw-input { font-family: var(--font-sans); font-size: 15px; color: var(--pw-ink-900); padding: 12px 14px; border: 1.5px solid var(--pw-border-strong); border-radius: var(--r-btn); background: #fff; outline: none; width: 100%; transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
+    /* === CONTACT === */
+    #contact { background: #fff; scroll-margin-top: 76px; }
+    .contact-grid { display: grid; gap: clamp(40px,5vw,88px); grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); align-items: start; }
+    @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } .contact-sticky { position: static !important; } }
+    .contact-sticky { position: sticky; top: 100px; }
+    .contact-h2 { font-family: var(--font-jp); font-weight: 800; line-height: 1.24; letter-spacing: -.025em; color: #0B1220; font-size: clamp(30px,4.4vw,50px); margin: 0; }
+    .contact-lead { margin: 26px 0 0; font-size: 15px; line-height: 1.92; color: #4B5563; max-width: 360px; }
+    .contact-points { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--pw-border-subtle); display: flex; flex-direction: column; gap: 12px; }
+    .contact-point { display: flex; align-items: baseline; gap: 12px; font-size: 13.5px; color: var(--pw-ink-600); }
+    .contact-point-k { font-family: var(--font-mono); font-size: 11px; color: var(--ac-strong); }
+    /* form */
+    .form-wrap { display: flex; flex-direction: column; gap: 24px; }
+    .form-row { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+    .form-field { display: flex; flex-direction: column; gap: 9px; }
+    .form-label { font-size: 13px; font-weight: 600; color: var(--pw-ink-800); display: flex; align-items: center; gap: 8px; }
+    .form-req { color: var(--ac-strong); font-family: var(--font-mono); font-size: 11px; }
+    .form-opt { color: var(--pw-ink-400); font-weight: 500; }
+    .pw-input { font-family: var(--font-sans); font-size: 15px; color: #0B1220; padding: 13px 0; border: none; border-bottom: 1.5px solid var(--pw-border-strong); border-radius: 0; background: transparent; outline: none; width: 100%; transition: border-color var(--dur-base) var(--ease-out); }
     .pw-input::placeholder { color: var(--pw-ink-300); }
-    .pw-input:focus { border-color: var(--pw-blue-600); box-shadow: var(--shadow-focus); }
-    textarea.pw-input { resize: vertical; min-height: 120px; line-height: 1.7; }
-    .field-error { display: none; font-size: 12px; color: var(--pw-danger); }
-    .interest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
-    .interest-label { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--pw-border-subtle); border-radius: var(--r-btn); padding: 11px 14px; cursor: pointer; font-size: 13.5px; color: var(--pw-ink-700); background: var(--pw-surface-alt); transition: border-color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out); }
-    .interest-label:hover { border-color: var(--pw-blue-300); background: var(--pw-blue-50); }
-    .interest-label input { width: 16px; height: 16px; accent-color: var(--pw-blue-600); flex: none; }
-    .btn-submit { font-family: var(--font-sans); font-size: 16px; font-weight: 700; color: #fff; background: var(--pw-blue-600); border: none; padding: 16px 28px; border-radius: var(--r-btn); cursor: pointer; width: 100%; box-shadow: var(--shadow-blue); transition: all var(--dur-base) var(--ease-out); }
-    .btn-submit:hover { background: var(--pw-blue-700); box-shadow: 0 8px 24px rgba(37,99,235,.4); transform: translateY(-1px); }
+    .pw-input:focus { border-color: var(--ac-strong); }
+    textarea.pw-input { resize: vertical; min-height: 96px; line-height: 1.7; }
+    .field-error { font-size: 12px; color: var(--pw-danger); display: none; }
+    /* interest pills */
+    .interest-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    .int-pill { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--pw-border-strong); border-radius: 999px; padding: 9px 16px; cursor: pointer; font-size: 13.5px; font-weight: 500; color: var(--pw-ink-700); background: #fff; transition: all .15s; user-select: none; }
+    .int-pill.checked { border-color: var(--ac-strong); color: var(--pw-blue-700); background: var(--pw-blue-50); }
+    .int-pill-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--pw-border-strong); transition: background .15s; }
+    .int-pill.checked .int-pill-dot { background: var(--ac-strong); }
+    .int-pill input { position: absolute; opacity: 0; width: 0; height: 0; }
+    /* submit */
+    .btn-submit { font-family: var(--font-sans); font-size: 16px; font-weight: 600; color: var(--ac-ink); background: var(--ac-strong); border: none; padding: 16px 32px; border-radius: var(--r-btn); cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); transition: all var(--dur-base) var(--ease-out); }
+    .btn-submit:hover { background: var(--pw-blue-700); transform: translateY(-1px); }
     .btn-submit:focus { outline: none; box-shadow: var(--shadow-focus); }
-    .form-status { display: none; font-size: 14px; line-height: 1.75; padding: 14px 16px; border-radius: var(--r-btn); border: 1px solid; }
-    .hp-field { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+    .form-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 4px; }
+    .form-privacy { margin: 0; font-size: 12px; line-height: 1.7; color: var(--pw-ink-400); max-width: 260px; }
+    .privacy-link { color: var(--ac-strong); text-decoration: none; }
+    .privacy-link:hover { text-decoration: underline; }
+    .form-status { font-size: 14px; line-height: 1.7; padding: 14px 16px; border-radius: var(--r-btn); border: 1px solid; display: none; }
+    /* honeypot */
+    .hp { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
 
-    /* ===== FOOTER ===== */
-    footer { background: #080F1D; color: #fff; padding: clamp(48px,7vw,72px) 0 28px; }
-    .footer-top { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; }
-    @media (max-width: 700px) { .footer-top { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
-    .footer-brand-name { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 700; color: #fff; }
-    .footer-tagline { font-family: var(--font-jp); font-size: 14px; color: #7A90B0; margin-top: 12px; line-height: 1.7; }
-    .footer-corp { font-size: 12px; color: #4C5F7A; margin-top: 6px; }
-    .footer-nav-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #4C5F7A; margin-bottom: 14px; display: block; }
-    .footer-link { display: block; font-size: 14px; color: #94A8C2; text-decoration: none; margin-bottom: 10px; transition: color var(--dur-base) var(--ease-out); }
+    /* === FOOTER === */
+    footer { background: #0B1220; color: #fff; padding: clamp(56px,7vw,88px) 0 36px; border-top: 1px solid rgba(255,255,255,.06); }
+    .footer-grid { display: grid; gap: 44px; grid-template-columns: minmax(0,1.4fr) repeat(auto-fit, minmax(140px,1fr)); }
+    @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+    .footer-logo { display: flex; align-items: center; gap: 11px; }
+    .footer-logo-name { font-size: 19px; font-weight: 700; color: #fff; }
+    .footer-tagline { margin: 18px 0 0; font-family: var(--font-jp); font-size: 14px; color: #93A3BE; line-height: 1.7; }
+    .footer-corp { margin: 10px 0 0; font-family: var(--font-mono); font-size: 12px; color: #6B7A95; letter-spacing: .02em; }
+    .footer-nav-label { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #6B7A95; display: block; margin-bottom: 14px; }
+    .footer-link { font-size: 14px; color: #C7D2E5; text-decoration: none; display: block; margin-bottom: 12px; transition: color var(--dur-base) var(--ease-out); }
     .footer-link:hover { color: #fff; }
-    .footer-bottom { margin-top: 48px; padding-top: 20px; border-top: 1px solid #1A2B4A; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
-    .footer-copy { font-size: 12px; color: #4C5F7A; }
-
-    /* ===== SECTION: FINAL CTA ===== */
-    #cta-section { background: linear-gradient(135deg, #0F1E3C 0%, #080F1D 100%); padding: clamp(64px,8vw,96px) 0; }
+    .footer-bottom { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--font-mono); font-size: 12px; color: #6B7A95; }
   </style>
 </head>
 <body>
@@ -284,16 +260,16 @@
 <!-- HEADER -->
 <header id="site-header">
   <div class="hdr">
-    <a href="#top" aria-label="PulseWorks ホーム" class="logo-link">
-      <img src="assets/pulseworks-logo-horizontal.svg" alt="PulseWorks" height="24">
+    <a href="#top" class="logo-wrap" aria-label="PulseWorks ホーム">
+      <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="var(--ac)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="logo-name">PulseWorks</span>
     </a>
     <nav id="desktop-nav" aria-label="メインナビゲーション">
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#why" class="nav-link">Approach</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#contact" class="btn-hdr">無料相談をする</a>
+      <a href="#services" class="nav-link-dark">Services</a>
+      <a href="#approach" class="nav-link-dark">Approach</a>
+      <a href="#projects" class="nav-link-dark">Projects</a>
+      <a href="#about" class="nav-link-dark">About</a>
+      <a href="#contact" class="hdr-cta">無料相談をする <span aria-hidden="true" style="font-family:var(--font-mono);">→</span></a>
     </nav>
     <button id="menu-btn" onclick="toggleMenu()" aria-label="メニューを開く" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -301,537 +277,320 @@
   </div>
   <nav id="mobile-nav" aria-label="モバイルナビゲーション">
     <a href="#services" onclick="closeMenu()" class="mnav-link">Services</a>
-    <a href="#why" onclick="closeMenu()" class="mnav-link">Approach</a>
+    <a href="#approach" onclick="closeMenu()" class="mnav-link">Approach</a>
     <a href="#projects" onclick="closeMenu()" class="mnav-link">Projects</a>
     <a href="#about" onclick="closeMenu()" class="mnav-link">About</a>
-    <a href="#faq" onclick="closeMenu()" class="mnav-link">FAQ</a>
     <a href="#contact" onclick="closeMenu()" class="mnav-cta">無料相談をする</a>
   </nav>
 </header>
 
 <!-- HERO -->
-<section id="top" aria-labelledby="hero-h1">
+<section id="top">
   <div id="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <svg width="100%" height="100%" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;opacity:.45;">
+    <!-- structural background -->
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;opacity:.9;">
+      <svg viewBox="0 0 720 760" preserveAspectRatio="xMaxYMid slice" style="position:absolute;top:0;right:0;height:100%;width:min(62%,880px);">
         <defs>
-          <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M60 0L0 0 0 60" fill="none" stroke="#1A2B4A" stroke-width="1"/>
-          </pattern>
-          <radialGradient id="hglow" cx="68%" cy="35%" r="55%">
-            <stop offset="0%" stop-color="#1D4ED8" stop-opacity=".35"/>
-            <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+          <radialGradient id="v2glow" cx="62%" cy="34%" r="58%">
+            <stop offset="0%" stop-color="#1B2C4E" stop-opacity=".95"/>
+            <stop offset="100%" stop-color="#0B1220" stop-opacity="0"/>
           </radialGradient>
+          <linearGradient id="v2line" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#608CFA" stop-opacity=".15"/>
+            <stop offset="55%" stop-color="#608CFA" stop-opacity=".95"/>
+            <stop offset="100%" stop-color="#A8C5FF" stop-opacity=".4"/>
+          </linearGradient>
         </defs>
-        <rect width="100%" height="100%" fill="url(#grid)"/>
-        <ellipse cx="68%" cy="35%" rx="550" ry="420" fill="url(#hglow)"/>
+        <rect x="0" y="0" width="720" height="760" fill="url(#v2glow)"/>
+        <g fill="#33446B" style="animation:pwNode 7s ease-in-out infinite;">
+          <circle cx="120" cy="120" r="1.6"/><circle cx="240" cy="120" r="1.6"/><circle cx="360" cy="120" r="1.6"/><circle cx="480" cy="120" r="1.6"/><circle cx="600" cy="120" r="1.6"/>
+          <circle cx="120" cy="240" r="1.6"/><circle cx="240" cy="240" r="1.6"/><circle cx="360" cy="240" r="1.6"/><circle cx="480" cy="240" r="1.6"/><circle cx="600" cy="240" r="1.6"/>
+          <circle cx="120" cy="360" r="1.6"/><circle cx="240" cy="360" r="1.6"/><circle cx="360" cy="360" r="1.6"/><circle cx="480" cy="360" r="1.6"/><circle cx="600" cy="360" r="1.6"/>
+          <circle cx="120" cy="480" r="1.6"/><circle cx="240" cy="480" r="1.6"/><circle cx="360" cy="480" r="1.6"/><circle cx="480" cy="480" r="1.6"/><circle cx="600" cy="480" r="1.6"/>
+          <circle cx="120" cy="600" r="1.6"/><circle cx="240" cy="600" r="1.6"/><circle cx="360" cy="600" r="1.6"/><circle cx="480" cy="600" r="1.6"/><circle cx="600" cy="600" r="1.6"/>
+        </g>
+        <g fill="none" stroke="#26375C" stroke-width="1">
+          <path d="M120 600 L240 480 L360 480 L480 360 L600 240"/>
+          <path d="M120 480 L240 360 L360 360 L480 240 L600 120"/>
+          <line x1="240" y1="480" x2="240" y2="360"/>
+          <line x1="360" y1="480" x2="360" y2="360"/>
+          <line x1="480" y1="360" x2="480" y2="240"/>
+        </g>
+        <path d="M120 600 L240 480 L360 480 L480 360 L600 240" fill="none" stroke="url(#v2line)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 8px rgba(96,140,250,.45));"/>
+        <g>
+          <circle cx="240" cy="480" r="4.5" fill="#0B1220" stroke="#608CFA" stroke-width="2"/>
+          <circle cx="360" cy="480" r="4.5" fill="#0B1220" stroke="#608CFA" stroke-width="2"/>
+          <circle cx="480" cy="360" r="4.5" fill="#0B1220" stroke="#608CFA" stroke-width="2"/>
+          <circle cx="600" cy="240" r="6" fill="#608CFA"/>
+          <circle cx="600" cy="240" r="13" fill="none" stroke="#608CFA" stroke-width="1" opacity=".5"/>
+        </g>
       </svg>
+      <div style="position:absolute;inset:0;background:linear-gradient(95deg,#0B1220 18%,rgba(11,18,32,.82) 44%,rgba(11,18,32,0) 78%);"></div>
     </div>
+
     <div class="hero-inner">
-      <div>
-        <span class="hero-eyebrow">AI IMPLEMENTATION PARTNER</span>
-        <h1 id="hero-h1" class="hero-h1">AIを、事業を<br>動かす<em>仕組み</em>に。</h1>
-        <p class="hero-sub">Web制作、採用、業務改善、AI研修まで。<br>PulseWorksは、生成AIを現場で使える成果へ変えます。</p>
+      <div class="reveal" style="max-width:800px;">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-line"></span>
+          <span class="hero-eyebrow-text">AI Implementation Partner</span>
+        </div>
+        <h1 class="hero-h1">AIを、事業を動かす<br><em>仕組み</em>に。</h1>
+        <p class="hero-sub">Web制作、顧客獲得、採用、業務改善、AI研修まで。PulseWorksは、生成AIを現場で使える成果へ変えます。</p>
         <p class="hero-note">構想だけで終わらせず、課題整理から設計・実装・改善・定着まで伴走します。</p>
         <div class="hero-actions">
-          <a href="#contact" class="btn-primary">無料相談をする</a>
-          <a href="#services" class="btn-ghost">サービスを見る</a>
+          <a href="#contact" class="hero-btn-primary">無料相談をする <span aria-hidden="true">→</span></a>
+          <a href="#services" class="hero-btn-ghost">サービスを見る</a>
         </div>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <svg width="400" height="320" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <filter id="glow2">
-              <feGaussianBlur stdDeviation="2.5" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <!-- Row 1 nodes -->
-          <rect x="10" y="24" width="88" height="60" rx="12" fill="#0D1728" stroke="#1E3A8A" stroke-width="1.5"/>
-          <text x="54" y="46" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#7FB0FF" text-anchor="middle" letter-spacing="1">01</text>
-          <text x="54" y="62" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">課題整理</text>
-          <text x="54" y="77" font-family="Inter,sans-serif" font-size="8" fill="#3A5878" text-anchor="middle">Discover</text>
-
-          <rect x="156" y="24" width="88" height="60" rx="12" fill="#0D1728" stroke="#1E3A8A" stroke-width="1.5"/>
-          <text x="200" y="46" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#7FB0FF" text-anchor="middle" letter-spacing="1">02</text>
-          <text x="200" y="62" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">設計</text>
-          <text x="200" y="77" font-family="Inter,sans-serif" font-size="8" fill="#3A5878" text-anchor="middle">Design</text>
-
-          <!-- Highlighted node -->
-          <rect x="302" y="24" width="88" height="60" rx="12" fill="#1E3A8A" stroke="#3B82F6" stroke-width="2"/>
-          <text x="346" y="46" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#93C5FD" text-anchor="middle" letter-spacing="1">03</text>
-          <text x="346" y="62" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">実装</text>
-          <text x="346" y="77" font-family="Inter,sans-serif" font-size="8" fill="#93C5FD" text-anchor="middle">Build</text>
-
-          <!-- Row 1 connectors -->
-          <line x1="98" y1="54" x2="156" y2="54" stroke="#1E3568" stroke-width="1.5" stroke-dasharray="4 4">
-            <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1.5s" repeatCount="indefinite"/>
-          </line>
-          <line x1="244" y1="54" x2="302" y2="54" stroke="#1E3568" stroke-width="1.5" stroke-dasharray="4 4">
-            <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1.5s" repeatCount="indefinite"/>
-          </line>
-
-          <!-- Vertical connector right -->
-          <line x1="346" y1="84" x2="346" y2="140" stroke="#1E3568" stroke-width="1.5" stroke-dasharray="4 4">
-            <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1.5s" repeatCount="indefinite"/>
-          </line>
-
-          <!-- Row 2 nodes (reversed) -->
-          <rect x="302" y="140" width="88" height="60" rx="12" fill="#0D1728" stroke="#1E3A8A" stroke-width="1.5"/>
-          <text x="346" y="162" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#7FB0FF" text-anchor="middle" letter-spacing="1">04</text>
-          <text x="346" y="178" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">検証</text>
-          <text x="346" y="193" font-family="Inter,sans-serif" font-size="8" fill="#3A5878" text-anchor="middle">Validate</text>
-
-          <rect x="156" y="140" width="88" height="60" rx="12" fill="#0D1728" stroke="#1E3A8A" stroke-width="1.5"/>
-          <text x="200" y="162" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#7FB0FF" text-anchor="middle" letter-spacing="1">05</text>
-          <text x="200" y="178" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">改善</text>
-          <text x="200" y="193" font-family="Inter,sans-serif" font-size="8" fill="#3A5878" text-anchor="middle">Improve</text>
-
-          <rect x="10" y="140" width="88" height="60" rx="12" fill="#0D1728" stroke="#1E3A8A" stroke-width="1.5"/>
-          <text x="54" y="162" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#7FB0FF" text-anchor="middle" letter-spacing="1">06</text>
-          <text x="54" y="178" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">定着</text>
-          <text x="54" y="193" font-family="Inter,sans-serif" font-size="8" fill="#3A5878" text-anchor="middle">Scale</text>
-
-          <!-- Row 2 connectors -->
-          <line x1="302" y1="170" x2="244" y2="170" stroke="#1E3568" stroke-width="1.5" stroke-dasharray="4 4">
-            <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1.5s" repeatCount="indefinite"/>
-          </line>
-          <line x1="156" y1="170" x2="98" y2="170" stroke="#1E3568" stroke-width="1.5" stroke-dasharray="4 4">
-            <animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1.5s" repeatCount="indefinite"/>
-          </line>
-
-          <!-- Pulse wave at bottom -->
-          <line x1="10" y1="250" x2="390" y2="250" stroke="#1A2B4A" stroke-width="1"/>
-          <path d="M10 250H76C88 250 92 244 96 232L114 190L136 300L156 222L170 243C176 248 180 250 192 250H390"
-                stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                stroke-dasharray="220 400" filter="url(#glow2)">
-            <animate attributeName="stroke-dashoffset" from="0" to="-620" dur="4s" repeatCount="indefinite"/>
-          </path>
-          <circle cx="136" cy="300" r="4" fill="#3B82F6">
-            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="156" cy="222" r="4" fill="#60A5FA">
-            <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" begin="0.4s" repeatCount="indefinite"/>
-          </circle>
-          <text x="200" y="288" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#2A4060" text-anchor="middle" letter-spacing="2">AI IMPLEMENTATION FLOW</text>
-        </svg>
+      <div class="hero-footer reveal reveal-d1">
+        <div class="hero-domain">
+          <span class="hero-domain-n">01</span>
+          <div><p class="hero-domain-title">AI Web・採用支援</p><p class="hero-domain-sub">コーポレートサイト・LP・採用導線</p></div>
+        </div>
+        <div class="hero-domain">
+          <span class="hero-domain-n">02</span>
+          <div><p class="hero-domain-title">AI業務改善・チャットボット</p><p class="hero-domain-sub">ナレッジ検索・自動化・PoC設計</p></div>
+        </div>
+        <div class="hero-domain">
+          <span class="hero-domain-n">03</span>
+          <div><p class="hero-domain-title">AI研修・実践支援</p><p class="hero-domain-sub">活用設計・テンプレート・定着</p></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUE PROPOSITION -->
-<section id="value" class="sec-pad" aria-labelledby="value-h2">
+<!-- PROBLEMS -->
+<section id="problems" class="sec-pad" aria-labelledby="prob-h2">
   <div class="container">
-    <div class="reveal">
-      <span class="sec-label">VALUE PROPOSITION</span>
-      <h2 id="value-h2" class="sec-h2">AI導入だけでは、<br>事業は変わらない。</h2>
-    </div>
-    <div class="value-grid">
-      <div class="reveal reveal-d1">
-        <p style="font-size:clamp(15px,1.5vw,17px);line-height:1.9;color:var(--pw-ink-600);">AIツールを導入しても、現場で使われず、業務に定着せず、成果につながらないケースは少なくありません。</p>
-        <p style="font-size:clamp(15px,1.5vw,17px);line-height:1.9;color:var(--pw-ink-600);margin-top:18px;">PulseWorksは、事業課題の整理、業務設計、Web制作、AI実装、社内定着までを横断し、AIを<strong style="color:var(--pw-ink-900);font-weight:700;">「使われ続ける仕組み」</strong>に変えます。</p>
-        <div style="margin-top:28px;">
-          <a href="#contact" class="btn-arrow">課題を相談する <span aria-hidden="true">→</span></a>
-        </div>
+    <div class="prob-grid reveal">
+      <div class="prob-sticky">
+        <div class="mono-label ink"><span class="mono-label-line"></span><span class="mono-label-text">Challenges</span></div>
+        <h2 id="prob-h2" class="prob-h2">AIを導入しただけでは、<br>事業は変わらない。</h2>
+        <p class="prob-body">PulseWorksは、AIを<strong style="color:#0B1220;font-weight:700;">"試すだけ"で終わらせず</strong>、成果につながる業務・顧客体験・仕組みに変えます。</p>
       </div>
-      <div class="reveal reveal-d2">
-        <div class="vflow-item">
-          <div class="vflow-num">1</div>
-          <div><div class="vflow-h4">事業課題の整理</div><p class="vflow-p">ツールありきでなく、何が本当のボトルネックかを整理します。</p></div>
-        </div>
-        <div class="vflow-item">
-          <div class="vflow-num">2</div>
-          <div><div class="vflow-h4">業務・顧客体験への落とし込み</div><p class="vflow-p">解決策を具体的な業務設計やUI・導線に変換します。</p></div>
-        </div>
-        <div class="vflow-item">
-          <div class="vflow-num accent">3</div>
-          <div><div class="vflow-h4">実装・検証・改善</div><p class="vflow-p">小さく始めて、動く形にしてから改善を重ねます。</p></div>
-        </div>
-        <div class="vflow-item">
-          <div class="vflow-num">4</div>
-          <div><div class="vflow-h4">定着・組織化</div><p class="vflow-p">テンプレート・研修・運用設計で、組織に根付かせます。</p></div>
-        </div>
-      </div>
+      <ol class="prob-list">
+        <li class="prob-item"><span class="prob-n">01</span><p class="prob-text">AIを導入したが、現場で使われていない</p></li>
+        <li class="prob-item"><span class="prob-n">02</span><p class="prob-text">Webサイトや採用ページを改善したいが、時間も人手も足りない</p></li>
+        <li class="prob-item"><span class="prob-n">03</span><p class="prob-text">社内業務が属人化し、確認・転記・資料作成に時間がかかる</p></li>
+        <li class="prob-item"><span class="prob-n">04</span><p class="prob-text">AIを使いたいが、何から始めるべきか分からない</p></li>
+        <li class="prob-item"><span class="prob-n">05</span><p class="prob-text">企画や構想はあるが、実装まで進まない</p></li>
+      </ol>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="sec-pad" aria-labelledby="services-h2">
+<section id="services" class="sec-pad" aria-labelledby="svc-h2">
   <div class="container">
-    <div class="reveal">
-      <span class="sec-label">SERVICES</span>
-      <h2 id="services-h2" class="sec-h2">事業の前進を、<br>AIと実装力で。</h2>
-      <p class="sec-lead">ボトルネックに応じて、3つの領域から支援します。</p>
+    <div class="svc-header reveal">
+      <div>
+        <div class="mono-label ink"><span class="mono-label-line"></span><span class="mono-label-text">Services</span></div>
+        <h2 id="svc-h2" class="svc-h2">3つの実装領域</h2>
+      </div>
+      <p class="svc-lead">事業の前進を妨げるボトルネックを、AIと実装力で解消します。戦略から制作・運用まで、領域を横断して伴走します。</p>
     </div>
-    <div class="svc-grid">
-
-      <article class="svc-card reveal reveal-d1">
-        <div class="svc-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#2563EB" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#2563EB" stroke-width="2" opacity=".5"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#2563EB" stroke-width="2" opacity=".5"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#2563EB" stroke-width="2" opacity=".3"/></svg>
-        </div>
-        <span class="svc-tag">WEB &amp; RECRUITING</span>
+    <article class="svc-row reveal">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;"><span class="svc-num">01</span><span class="svc-eyebrow">Web &amp; Recruiting</span></div>
         <h3 class="svc-h3">AI Web・採用支援</h3>
-        <p class="svc-tagline">「伝わらないサイト」を、事業を前に進める導線へ。</p>
         <p class="svc-desc">事業理解、ターゲット設計、コピー、デザイン、実装まで。AIを活用しながら、伝わるWebサイトと採用導線を高速に形にします。</p>
-        <ul class="svc-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>コーポレートサイト・サービスサイト</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>新規事業LP・採用LP</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Web導線・CV改善</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>AI検索時代を見据えたコンテンツ診断</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>営業資料・提案資料制作</li>
-        </ul>
-        <div class="svc-who"><strong>こんな会社に：</strong>採用強化中のスタートアップ、リブランドを検討中の中小企業、サイトのCVが低い事業会社。</div>
-        <a href="#contact" class="btn-arrow" style="margin-top:20px;">詳しく相談する <span aria-hidden="true">→</span></a>
-      </article>
-
-      <article class="svc-card reveal reveal-d2">
-        <div class="svc-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#2563EB" stroke-width="2" stroke-linejoin="round"/><path d="M2 17l10 5 10-5" stroke="#2563EB" stroke-width="2" stroke-linejoin="round" opacity=".5"/><path d="M2 12l10 5 10-5" stroke="#2563EB" stroke-width="2" stroke-linejoin="round" opacity=".3"/></svg>
-        </div>
-        <span class="svc-tag">WORKFLOW &amp; AI AUTOMATION</span>
+        <a href="#contact" class="svc-cta">詳しく相談する <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="svc-items">
+        <li class="svc-item"><span class="svc-item-key">a</span><span>コーポレートサイト・サービスサイト</span></li>
+        <li class="svc-item"><span class="svc-item-key">b</span><span>新規事業LP・採用LP</span></li>
+        <li class="svc-item"><span class="svc-item-key">c</span><span>Web導線・CV改善</span></li>
+        <li class="svc-item"><span class="svc-item-key">d</span><span>AI検索時代を見据えたWeb・コンテンツ診断</span></li>
+        <li class="svc-item"><span class="svc-item-key">e</span><span>営業資料・提案資料制作</span></li>
+      </ul>
+    </article>
+    <article class="svc-row reveal reveal-d1">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;"><span class="svc-num">02</span><span class="svc-eyebrow">Workflow &amp; Chatbot</span></div>
         <h3 class="svc-h3">AI業務改善・チャットボット</h3>
-        <p class="svc-tagline">属人化・手作業・情報探索を、AIで回る業務へ。</p>
         <p class="svc-desc">手作業、情報探索、問い合わせ対応、資料作成などを見直し、AIで回る業務フローを設計・実装します。</p>
-        <ul class="svc-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>社内ナレッジ検索システム</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>AIチャットボット開発</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>営業・提案書作成支援</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>議事録・タスク整理の自動化</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>小規模PoC・業務自動化</li>
-        </ul>
-        <div class="svc-who"><strong>こんな会社に：</strong>業務効率化を検討中の中小企業、問い合わせ対応コストを下げたいSaaS企業、DX推進担当がいない組織。</div>
-        <a href="#contact" class="btn-arrow" style="margin-top:20px;">詳しく相談する <span aria-hidden="true">→</span></a>
-      </article>
-
-      <article class="svc-card reveal reveal-d3">
-        <div class="svc-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#2563EB" stroke-width="2"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#2563EB" stroke-width="2" stroke-linecap="round" opacity=".5"/></svg>
-        </div>
-        <span class="svc-tag">TRAINING &amp; ENABLEMENT</span>
+        <a href="#contact" class="svc-cta">詳しく相談する <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="svc-items">
+        <li class="svc-item"><span class="svc-item-key">a</span><span>社内ナレッジ検索</span></li>
+        <li class="svc-item"><span class="svc-item-key">b</span><span>AIチャットボット</span></li>
+        <li class="svc-item"><span class="svc-item-key">c</span><span>営業・提案書作成支援</span></li>
+        <li class="svc-item"><span class="svc-item-key">d</span><span>議事録・タスク整理</span></li>
+        <li class="svc-item"><span class="svc-item-key">e</span><span>小規模PoC・業務自動化</span></li>
+      </ul>
+    </article>
+    <article class="svc-row reveal reveal-d2">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;"><span class="svc-num">03</span><span class="svc-eyebrow">Training &amp; Enablement</span></div>
         <h3 class="svc-h3">AI研修・実践支援</h3>
-        <p class="svc-tagline">一部だけが使うAIを、組織全体の実践力へ。</p>
         <p class="svc-desc">AIを使える人が一部だけ、という状態から脱却。現場で使えるスキル・テンプレート・運用ルールを整えます。</p>
-        <ul class="svc-list">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>ChatGPT・Claude・Claude Code・Cursor活用</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>経営者・管理職向けAI活用設計</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>部門別ワークショップ</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>プロンプト・業務テンプレート作成</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5L10 17.5L19 7" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>導入後の定着支援</li>
-        </ul>
-        <div class="svc-who"><strong>こんな会社に：</strong>AI研修を検討中の中小企業・スタートアップ、AI推進を経営課題として扱いたい事業責任者。</div>
-        <a href="#contact" class="btn-arrow" style="margin-top:20px;">詳しく相談する <span aria-hidden="true">→</span></a>
-      </article>
-
-    </div>
+        <a href="#contact" class="svc-cta">詳しく相談する <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="svc-items">
+        <li class="svc-item"><span class="svc-item-key">a</span><span>ChatGPT・Claude・Claude Code・Cursor活用</span></li>
+        <li class="svc-item"><span class="svc-item-key">b</span><span>経営者・管理職向けAI活用設計</span></li>
+        <li class="svc-item"><span class="svc-item-key">c</span><span>部門別ワークショップ</span></li>
+        <li class="svc-item"><span class="svc-item-key">d</span><span>プロンプト・業務テンプレート作成</span></li>
+        <li class="svc-item"><span class="svc-item-key">e</span><span>導入後の定着支援</span></li>
+      </ul>
+    </article>
   </div>
 </section>
 
-<!-- WHY PULSEWORKS -->
-<section id="why" class="sec-pad" aria-labelledby="why-h2">
-  <div class="container">
-    <div class="reveal">
-      <span class="sec-label sec-label-light">WHY PULSEWORKS</span>
-      <h2 id="why-h2" class="sec-h2 sec-h2-light">戦略を描き、<br>現場で動く形までつくる。</h2>
+<!-- WHY / APPROACH -->
+<section id="approach" class="sec-pad" aria-labelledby="why-h2">
+  <div class="approach-bg" aria-hidden="true"></div>
+  <div class="container" style="position:relative;">
+    <div class="reveal" style="max-width:640px;margin-bottom:clamp(48px,6vw,80px);">
+      <div class="mono-label light-label"><span class="mono-label-line"></span><span class="mono-label-text">Why PulseWorks</span></div>
+      <h2 id="why-h2" class="why-h2">ツールではなく、<br>成果から逆算する。</h2>
     </div>
     <div class="why-grid reveal reveal-d1">
-      <div class="why-item">
-        <div class="why-num">01</div>
-        <h3 class="why-h3">課題から考える</h3>
-        <p class="why-p">ツールありきではなく、事業・顧客・現場の課題から設計します。「何を入れるか」より「何を変えるか」を先に整理します。</p>
+      <div class="why-cell"><span class="why-n">01</span><h3 class="why-title">課題から考える</h3><p class="why-desc">ツールありきではなく、事業・顧客・現場の課題から設計します。</p></div>
+      <div class="why-cell"><span class="why-n">02</span><h3 class="why-title">構想で終わらせない</h3><p class="why-desc">戦略や資料だけで終わらず、実装・検証・改善まで進めます。</p></div>
+      <div class="why-cell"><span class="why-n">03</span><h3 class="why-title">小さく速く試す</h3><p class="why-desc">大きな導入前に、効果が出やすい領域からPoCを設計します。</p></div>
+      <div class="why-cell"><span class="why-n">04</span><h3 class="why-title">仕組みとして定着させる</h3><p class="why-desc">納品で終わらせず、テンプレート・運用ルール・研修を通じて組織に残します。</p></div>
+    </div>
+    <div class="reveal reveal-d2" style="margin-top:clamp(64px,8vw,104px);">
+      <div class="proc-label"><span class="proc-label-text">How We Work</span><span class="proc-label-line"></span></div>
+      <div class="proc-grid">
+        <div class="proc-cell"><span class="proc-n">01 / 05</span><p class="proc-title">ヒアリング</p></div>
+        <div class="proc-cell"><span class="proc-n">02 / 05</span><p class="proc-title">課題整理・優先順位設計</p></div>
+        <div class="proc-cell"><span class="proc-n">03 / 05</span><p class="proc-title">企画・設計</p></div>
+        <div class="proc-cell"><span class="proc-n">04 / 05</span><p class="proc-title">制作・実装・検証</p></div>
+        <div class="proc-cell"><span class="proc-n">05 / 05</span><p class="proc-title">改善・運用・定着支援</p></div>
       </div>
-      <div class="why-item">
-        <div class="why-num">02</div>
-        <h3 class="why-h3">構想で終わらせない</h3>
-        <p class="why-p">戦略や資料だけで終わらず、実装・検証・改善まで進めます。顧客に届く形・現場で動く形まで落とし込みます。</p>
-      </div>
-      <div class="why-item">
-        <div class="why-num">03</div>
-        <h3 class="why-h3">小さく速く試す</h3>
-        <p class="why-p">大きな導入前に、効果が出やすい領域からPoCを設計します。リスクを抑えながら成果を確認してから広げます。</p>
-      </div>
-      <div class="why-item">
-        <div class="why-num">04</div>
-        <h3 class="why-h3">仕組みとして定着させる</h3>
-        <p class="why-p">納品で終わらせず、テンプレート・運用ルール・研修を通じて組織に残します。担当者が変わっても機能し続ける状態を目指します。</p>
-      </div>
+      <p class="proc-note">まずは、効果が出やすいテーマから小さく始めます。</p>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section id="process" class="sec-pad" aria-labelledby="process-h2">
-  <div class="container">
-    <div class="reveal">
-      <span class="sec-label">HOW WE WORK</span>
-      <h2 id="process-h2" class="sec-h2">相談から、<br>伴走が始まるまで。</h2>
-      <p class="sec-lead">まずは効果が出やすいテーマから、小さく始めます。</p>
-    </div>
-    <div class="proc-steps reveal reveal-d1">
-      <div class="proc-step">
-        <div class="proc-num hi">1</div>
-        <div class="proc-body">
-          <div class="proc-title">ヒアリング</div>
-          <div class="proc-desc">現状の課題・目標・体制を整理します。まだ曖昧でも大丈夫です。</div>
-        </div>
-      </div>
-      <div class="proc-step">
-        <div class="proc-num">2</div>
-        <div class="proc-body">
-          <div class="proc-title">課題整理・優先順位設計</div>
-          <div class="proc-desc">最も効果が出やすい領域を特定します。</div>
-        </div>
-      </div>
-      <div class="proc-step">
-        <div class="proc-num">3</div>
-        <div class="proc-body">
-          <div class="proc-title">企画・設計</div>
-          <div class="proc-desc">解決策を具体的な設計・工程に落とし込みます。</div>
-        </div>
-      </div>
-      <div class="proc-step">
-        <div class="proc-num">4</div>
-        <div class="proc-body">
-          <div class="proc-title">制作・実装・検証</div>
-          <div class="proc-desc">実際に動くものを作り、効果を確認します。</div>
-        </div>
-      </div>
-      <div class="proc-step">
-        <div class="proc-num">5</div>
-        <div class="proc-body">
-          <div class="proc-title">改善・運用・定着</div>
-          <div class="proc-desc">継続的な改善と組織への定着を支援します。</div>
-        </div>
-      </div>
-    </div>
-    <div class="proc-note reveal reveal-d2">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="2"/><path d="M12 8v4l3 3" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg>
-      まずは30分の無料ヒアリングから。課題が整理できていなくても大丈夫です。
-    </div>
-  </div>
-</section>
-
-<!-- PULSEWORKS LAB -->
+<!-- PROJECTS / LAB -->
 <section id="projects" class="sec-pad" aria-labelledby="lab-h2">
   <div class="container">
-    <div class="reveal">
-      <span class="sec-label">PULSEWORKS LAB</span>
-      <h2 id="lab-h2" class="sec-h2">自主検証プロジェクト</h2>
-      <p class="sec-lead">PulseWorks自身を実験場に、AIを活用した制作・業務改善のベストプラクティスを検証しています。</p>
-      <div class="lab-badge">自主制作・実証プロジェクト</div>
-    </div>
-    <div class="lab-grid reveal reveal-d1">
-      <div class="lab-card">
-        <span class="lab-type">WEB</span>
-        <div class="lab-title">AI活用コーポレートサイト</div>
-        <p class="lab-desc">事業理解からデザイン・実装までAIを取り入れた制作プロセスを構築・検証。このサイト自体がその成果物です。</p>
-        <span class="lab-status live">制作完了・運用中</span>
+    <div class="lab-header reveal">
+      <div>
+        <div class="mono-label ink"><span class="mono-label-line"></span><span class="mono-label-text">PulseWorks Lab</span></div>
+        <h2 id="lab-h2" class="lab-h2">自らを実験場に。</h2>
       </div>
-      <div class="lab-card">
-        <span class="lab-type">RECRUITING</span>
-        <div class="lab-title">採用LPデモプロジェクト</div>
-        <p class="lab-desc">ターゲット設計とAIコピー生成を組み合わせた採用導線の試作。複数パターンのA/B設計まで含めた検証。</p>
-        <span class="lab-status">設計中</span>
-      </div>
-      <div class="lab-card">
-        <span class="lab-type">CHATBOT</span>
-        <div class="lab-title">社内ナレッジ検索PoC</div>
-        <p class="lab-desc">FAQやドキュメントに基づいて回答するチャットボットの会話設計とRAG構成の検証。</p>
-        <span class="lab-status">開発中</span>
-      </div>
-      <div class="lab-card">
-        <span class="lab-type">DIAGNOSIS</span>
-        <div class="lab-title">AIO診断レポート</div>
-        <p class="lab-desc">AI検索時代を見据えたWebサイト・コンテンツの診断フォーマットと改善提案の型を試作。</p>
-        <span class="lab-status">設計中</span>
-      </div>
-      <div class="lab-card">
-        <span class="lab-type">WORKFLOW</span>
-        <div class="lab-title">提案書生成ワークフロー</div>
-        <p class="lab-desc">ヒアリング内容からAIが提案書のドラフトを生成する業務フローの設計と時間短縮効果の検証。</p>
-        <span class="lab-status">検証中</span>
-      </div>
-      <div class="lab-card">
-        <span class="lab-type">CONTENT</span>
-        <div class="lab-title">発信コンテンツ制作フロー</div>
-        <p class="lab-desc">SNS投稿・記事・スライドを一元的に生産するAI活用ワークフローの型化と再現性の検証。</p>
-        <span class="lab-status">実験中</span>
+      <div>
+        <p style="font-size:clamp(15px,1.6vw,17px);line-height:1.9;color:#4B5563;max-width:440px;margin:0;">PulseWorks自身を実験場に、AIを活用した制作・業務改善・発信のベストプラクティスを検証しています。</p>
+        <div class="lab-badge"><span class="lab-dot"></span>自主制作・実証プロジェクト</div>
       </div>
     </div>
-    <p style="margin-top:24px;font-size:13.5px;color:var(--pw-ink-400);">公開可能なプロジェクトは順次追加予定です。</p>
+    <div class="lab-table reveal reveal-d1">
+      <a href="#contact" class="lab-row"><span class="lab-n">01</span><span class="lab-title">AI活用コーポレートサイト</span><span class="lab-desc lab-row-desc">事業理解からデザイン・実装までAIを取り入れた制作プロセスを検証。</span><span class="lab-tag">Web</span></a>
+      <a href="#contact" class="lab-row"><span class="lab-n">02</span><span class="lab-title">採用LPデモプロジェクト</span><span class="lab-desc lab-row-desc">ターゲット設計とコピー生成を組み合わせた採用導線の試作。</span><span class="lab-tag">Recruiting</span></a>
+      <a href="#contact" class="lab-row"><span class="lab-n">03</span><span class="lab-title">AIチャットボット試作</span><span class="lab-desc lab-row-desc">社内ナレッジ検索と一次対応を想定した会話設計の検証。</span><span class="lab-tag">Chatbot</span></a>
+      <a href="#contact" class="lab-row"><span class="lab-n">04</span><span class="lab-title">AIO診断レポート</span><span class="lab-desc lab-row-desc">AI検索時代を見据えたWeb・コンテンツの診断フォーマットを試作。</span><span class="lab-tag">Diagnosis</span></a>
+      <a href="#contact" class="lab-row"><span class="lab-n">05</span><span class="lab-title">営業資料・提案書生成ワークフロー</span><span class="lab-desc lab-row-desc">提案資料作成をAIで支援する業務フローの設計と検証。</span><span class="lab-tag">Workflow</span></a>
+      <a href="#contact" class="lab-row"><span class="lab-n">06</span><span class="lab-title">SNS投稿テンプレート・制作フロー</span><span class="lab-desc lab-row-desc">発信コンテンツの企画から制作までを型にする実験。</span><span class="lab-tag">Content</span></a>
+    </div>
+    <p style="margin:26px 0 0;font-size:13.5px;line-height:1.8;color:var(--pw-ink-400);">公開可能なプロジェクトは順次追加予定です。</p>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about" class="sec-pad" aria-labelledby="about-h2">
   <div class="container">
-    <div class="reveal">
-      <span class="sec-label sec-label-light">ABOUT</span>
-      <h2 id="about-h2" class="sec-h2 sec-h2-light">PulseWorksについて</h2>
-    </div>
     <div class="about-grid">
+      <div class="reveal">
+        <div class="mono-label light-label"><span class="mono-label-line"></span><span class="mono-label-text">About</span></div>
+        <h2 id="about-h2" class="about-h2">構想から実装、改善まで。<br>横断して伴走する。</h2>
+        <div style="margin-top:30px;display:flex;flex-direction:column;gap:20px;max-width:560px;">
+          <p class="about-p" style="color:#C7D2E5;">PulseWorksは、生成AIを活用して、企業や個人の「次の一歩」を形にする会社です。</p>
+          <p class="about-p" style="color:#93A3BE;">AIは、導入するだけでは成果につながりません。事業の課題を整理し、業務や顧客体験に落とし込み、現場で使われ続ける仕組みにして初めて価値になります。私たちは、戦略・クリエイティブ・テクノロジーを横断しながら、構想から実装、改善まで伴走します。</p>
+        </div>
+      </div>
       <div class="reveal reveal-d1">
-        <p class="sec-lead sec-lead-light">PulseWorksは、生成AIを活用して企業の「次の一手」を形にする会社です。</p>
-        <p style="margin-top:18px;font-size:clamp(15px,1.5vw,17px);line-height:1.9;color:#B8C8DF;">AIは、導入するだけでは成果につながりません。事業課題を整理し、業務や顧客体験に落とし込み、現場で使われ続ける仕組みにして初めて価値になります。</p>
-        <p style="margin-top:16px;font-size:clamp(15px,1.5vw,17px);line-height:1.9;color:#B8C8DF;">私たちは、戦略・クリエイティブ・テクノロジーを横断しながら、構想から実装、改善まで伴走します。</p>
-        <div class="about-meta">
-          <div class="about-meta-row"><span class="about-meta-key">会社名</span><span class="about-meta-val">株式会社PulseWorks</span></div>
-          <div class="about-meta-row"><span class="about-meta-key">英表記</span><span class="about-meta-val">PulseWorks Inc.</span></div>
-          <div class="about-meta-row"><span class="about-meta-key">事業内容</span><span class="about-meta-val">AIコンサルティング・Web制作・AI研修</span></div>
-        </div>
-      </div>
-      <div class="reveal reveal-d2">
         <div class="founder-card">
-          <div class="founder-avatar" aria-label="小塩健介のイニシャル">KO</div>
-          <div class="founder-name">小塩 健介</div>
-          <div class="founder-name-en">Kensuke Ojio</div>
-          <div class="founder-role">代表取締役 CEO</div>
-          <p class="founder-bio">東北大学卒。経営コンサルティング領域での経験を基盤に、生成AIを活用した事業開発、Web制作、業務改善に取り組んでいます。<br><br>構想を資料で終わらせず、顧客に届く形・現場で動く形まで落とし込むことを重視しています。</p>
-          <div class="founder-tags">
-            <span class="founder-tag">経営コンサルティング</span>
-            <span class="founder-tag">AI事業開発</span>
-            <span class="founder-tag">Web制作</span>
-            <span class="founder-tag">業務改善</span>
+          <div class="founder-header">
+            <div class="founder-avatar" aria-label="小塩健介のイニシャル">
+              <span class="founder-initials">KO</span>
+              <span class="founder-dot"></span>
+            </div>
+            <div>
+              <p class="founder-role">Founder / CEO</p>
+              <p class="founder-name-jp">小塩 健介</p>
+              <p class="founder-name-en">Kensuke Ojio</p>
+            </div>
           </div>
+          <p class="founder-bio">経営コンサルティング領域での経験を基盤に、生成AIを活用した事業開発、Web制作、業務改善に取り組んでいます。構想を資料で終わらせず、顧客に届く形・現場で動く形まで落とし込むことを重視しています。</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="sec-pad" aria-labelledby="faq-h2">
-  <div class="container" style="text-align:center;">
-    <div class="reveal">
-      <span class="sec-label" style="justify-content:center;">FAQ</span>
-      <h2 id="faq-h2" class="sec-h2">よくあるご質問</h2>
-      <p class="sec-lead" style="margin:16px auto 0;text-align:center;">相談前の疑問にお答えします。</p>
-    </div>
-  </div>
-  <div class="faq-list reveal reveal-d1">
-    <div class="faq-item">
-      <button class="faq-btn" aria-expanded="false">
-        <span>相談段階で課題がまだ整理できていなくても大丈夫ですか？</span>
-        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      </button>
-      <div class="faq-answer">大丈夫です。「何となく非効率だと感じている」「AIを使いたいが何から始めるか分からない」という段階からご相談いただけます。ヒアリングを通じて課題を一緒に整理することを最初のステップとしています。</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" aria-expanded="false">
-        <span>Web制作だけ、AI研修だけの依頼も可能ですか？</span>
-        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      </button>
-      <div class="faq-answer">はい、単体でのご依頼も可能です。ただし、ヒアリングを通じて関連する課題が見えた場合は、合わせてご提案することがあります。まずはご希望の領域からお気軽にご相談ください。</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" aria-expanded="false">
-        <span>小規模なPoCや試作から依頼できますか？</span>
-        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      </button>
-      <div class="faq-answer">はい。大きなプロジェクトの前に、まず小さく試すことを推奨しています。効果が確認できた領域から順に広げるアプローチが、失敗リスクを抑えながら成果を出す近道だと考えています。</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" aria-expanded="false">
-        <span>対面とオンラインのどちらに対応していますか？</span>
-        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      </button>
-      <div class="faq-answer">基本的にオンライン（Zoom・Google Meet等）での対応となります。ご希望に応じて対面での打ち合わせも検討可能です。まずはオンラインでのご相談からお気軽にどうぞ。</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" aria-expanded="false">
-        <span>予算感はどの程度ですか？</span>
-        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      </button>
-      <div class="faq-answer">課題の内容・範囲・体制によって異なります。まずはヒアリングのうえで、目標と予算に合わせたご提案をさせていただきます。小規模な試作から、継続的な伴走支援まで柔軟に対応しています。</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-btn" aria-expanded="false">
-        <span>まだAI導入の方針が決まっていませんが、相談できますか？</span>
-        <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#374151" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-      </button>
-      <div class="faq-answer">ぜひご相談ください。方針が決まっていない段階でのご相談を歓迎しています。AI活用の可能性と優先順位を整理するところからご支援できます。「何をすべきか」の整理自体がPulseWorksの強みの一つです。</div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section id="cta-section" aria-label="お問い合わせへの誘導">
-  <div class="container" style="text-align:center;">
-    <div class="reveal">
-      <h2 style="font-family:var(--font-jp);font-weight:800;font-size:clamp(28px,4.6vw,46px);line-height:1.25;letter-spacing:-.02em;color:#fff;text-wrap:balance;">AI活用を、次の一手に。</h2>
-      <p style="margin:20px auto 0;font-size:clamp(15px,1.5vw,17px);line-height:1.85;color:#B8C8DF;max-width:540px;">課題がまだ曖昧でも大丈夫です。<br>Web制作、採用、業務改善、AI研修について、まずは現状をお聞かせください。</p>
-      <a href="#contact" class="btn-primary" style="display:inline-flex;margin-top:32px;">無料相談をする</a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="sec-pad" aria-labelledby="contact-h2">
-  <div class="contact-wrap">
-    <div style="text-align:center;" class="reveal">
-      <span class="sec-label" style="justify-content:center;">CONTACT</span>
-      <h2 id="contact-h2" class="sec-h2">無料相談をする</h2>
-      <p class="sec-lead" style="margin:16px auto 0;text-align:center;max-width:500px;">下記フォームよりお気軽にご相談ください。内容を確認のうえ、ご連絡いたします。</p>
-    </div>
-
-    <div class="contact-form-card reveal reveal-d1">
-      <form id="contact-form" novalidate style="position:relative;">
-        <div class="hp-field" aria-hidden="true">
-          <label for="hp-web">Website</label>
-          <input type="text" id="hp-web" name="website" tabindex="-1" autocomplete="off">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-sticky reveal">
+        <div class="mono-label ink"><span class="mono-label-line"></span><span class="mono-label-text">Contact</span></div>
+        <h2 id="contact-h2" class="contact-h2">AI活用を、<br>次の一手に。</h2>
+        <p class="contact-lead">課題がまだ曖昧でも大丈夫です。Web制作、採用、業務改善、AI研修について、まずは状況をお聞かせください。</p>
+        <div class="contact-points">
+          <div class="contact-point"><span class="contact-point-k">01</span><span>初回相談は無料です。オンラインで対応します。</span></div>
+          <div class="contact-point"><span class="contact-point-k">02</span><span>営業日2〜3日以内にご返信します。</span></div>
+          <div class="contact-point"><span class="contact-point-k">03</span><span>構想段階・情報収集のみのご相談も歓迎します。</span></div>
         </div>
-        <div class="form-fields">
-          <div class="form-row">
-            <div class="form-field">
-              <label for="pw-name" class="form-label">お名前 <span class="req">*</span></label>
-              <input id="pw-name" name="name" type="text" autocomplete="name" aria-required="true" placeholder="山田 太郎" class="pw-input">
-              <span id="err-name" class="field-error" role="alert"></span>
-            </div>
-            <div class="form-field">
-              <label for="pw-company" class="form-label">会社名 <span class="opt">任意</span></label>
-              <input id="pw-company" name="company" type="text" autocomplete="organization" placeholder="株式会社〇〇" class="pw-input">
-            </div>
-          </div>
+      </div>
 
+      <form id="contact-form" novalidate class="form-wrap reveal reveal-d1" style="position:relative;">
+        <div class="hp" aria-hidden="true"><label for="hp-web">Website</label><input type="text" id="hp-web" name="website" tabindex="-1" autocomplete="off"></div>
+
+        <div class="form-row">
           <div class="form-field">
-            <label for="pw-email" class="form-label">メールアドレス <span class="req">*</span></label>
-            <input id="pw-email" name="email" type="email" autocomplete="email" aria-required="true" placeholder="you@example.com" class="pw-input">
-            <span id="err-email" class="field-error" role="alert"></span>
+            <label for="v2-name" class="form-label">お名前 <span class="form-req">required</span></label>
+            <input id="v2-name" name="name" type="text" autocomplete="name" aria-required="true" placeholder="山田 太郎" class="pw-input">
+            <span id="err-name" class="field-error" role="alert"></span>
           </div>
-
           <div class="form-field">
-            <label for="pw-message" class="form-label">ご相談内容 <span class="req">*</span></label>
-            <textarea id="pw-message" name="message" rows="5" aria-required="true" placeholder="現在の課題や相談したい内容をご記入ください。まだ曖昧な段階でも大丈夫です。" class="pw-input"></textarea>
-            <span id="err-msg" class="field-error" role="alert"></span>
+            <label for="v2-company" class="form-label">会社名</label>
+            <input id="v2-company" name="company" type="text" autocomplete="organization" placeholder="株式会社〇〇" class="pw-input">
           </div>
+        </div>
 
-          <fieldset style="border:none;padding:0;">
-            <legend class="form-label" style="margin-bottom:10px;">興味のある支援内容 <span class="opt">複数選択可</span></legend>
-            <div class="interest-grid">
-              <label class="interest-label"><input type="checkbox" name="interest" value="AI Web・採用支援"><span>AI Web・採用支援</span></label>
-              <label class="interest-label"><input type="checkbox" name="interest" value="AI業務改善・チャットボット"><span>AI業務改善・チャットボット</span></label>
-              <label class="interest-label"><input type="checkbox" name="interest" value="AI研修・実践支援"><span>AI研修・実践支援</span></label>
-              <label class="interest-label"><input type="checkbox" name="interest" value="その他"><span>その他</span></label>
-            </div>
-          </fieldset>
+        <div class="form-field">
+          <label for="v2-email" class="form-label">メールアドレス <span class="form-req">required</span></label>
+          <input id="v2-email" name="email" type="email" autocomplete="email" aria-required="true" placeholder="you@example.com" class="pw-input">
+          <span id="err-email" class="field-error" role="alert"></span>
+        </div>
 
-          <div class="form-row">
-            <div class="form-field">
-              <label for="pw-budget" class="form-label">予算感 <span class="opt">任意</span></label>
-              <input id="pw-budget" name="budget" type="text" placeholder="例：30〜50万円 / 未定" class="pw-input">
-            </div>
-            <div class="form-field">
-              <label for="pw-timing" class="form-label">希望時期 <span class="opt">任意</span></label>
-              <input id="pw-timing" name="timing" type="text" placeholder="例：今四半期中 / 未定" class="pw-input">
-            </div>
+        <div class="form-field">
+          <label for="v2-message" class="form-label">ご相談内容 <span class="form-req">required</span></label>
+          <textarea id="v2-message" name="message" rows="4" aria-required="true" placeholder="現在の課題や、相談したい内容をご記入ください。" class="pw-input"></textarea>
+          <span id="err-msg" class="field-error" role="alert"></span>
+        </div>
+
+        <div class="form-field">
+          <span class="form-label">興味のある支援内容 <span class="form-opt">（複数選択可）</span></span>
+          <div class="interest-wrap" id="interest-wrap">
+            <label class="int-pill"><input type="checkbox" name="interest" value="AI Web・採用支援"><span class="int-pill-dot"></span>AI Web・採用支援</label>
+            <label class="int-pill"><input type="checkbox" name="interest" value="AI業務改善・チャットボット"><span class="int-pill-dot"></span>AI業務改善・チャットボット</label>
+            <label class="int-pill"><input type="checkbox" name="interest" value="AI研修・実践支援"><span class="int-pill-dot"></span>AI研修・実践支援</label>
+            <label class="int-pill"><input type="checkbox" name="interest" value="その他"><span class="int-pill-dot"></span>その他</label>
           </div>
+        </div>
 
-          <div id="form-status" class="form-status" role="status"></div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="v2-budget" class="form-label">予算感 <span class="form-opt">（任意）</span></label>
+            <input id="v2-budget" name="budget" type="text" placeholder="例：30〜50万円 / 未定" class="pw-input">
+          </div>
+          <div class="form-field">
+            <label for="v2-timing" class="form-label">希望時期 <span class="form-opt">（任意）</span></label>
+            <input id="v2-timing" name="timing" type="text" placeholder="例：今四半期中 / 未定" class="pw-input">
+          </div>
+        </div>
 
-          <button type="submit" class="btn-submit">無料相談を申し込む</button>
+        <div id="form-status" class="form-status" role="status"></div>
 
-          <p style="margin:0;font-size:12.5px;line-height:1.75;color:var(--pw-ink-400);text-align:center;">ご入力いただいた内容は、ご相談対応の目的にのみ利用します。<a href="privacy.html" style="color:var(--pw-blue-600);text-decoration:none;">プライバシーポリシー</a>をご確認ください。</p>
+        <div class="form-footer">
+          <button type="submit" class="btn-submit">無料相談を申し込む <span aria-hidden="true">→</span></button>
+          <p class="form-privacy"><a href="privacy.html" class="privacy-link">プライバシーポリシー</a>に同意のうえ送信してください。</p>
         </div>
       </form>
     </div>
@@ -841,51 +600,40 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-top">
+    <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-brand-name">
-          <svg width="26" height="26" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="#3B82F6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          PulseWorks
+        <div class="footer-logo">
+          <svg width="28" height="28" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M5 32H17C19 32 20 31 21 29L25 19L32 47L39 12L45 30C46 31.5 47 32 49 32H59" stroke="var(--ac)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="footer-logo-name">PulseWorks</span>
         </div>
         <p class="footer-tagline">AIを、事業を動かす仕組みに。</p>
         <p class="footer-corp">株式会社PulseWorks</p>
       </div>
-      <nav aria-label="サービスナビゲーション">
-        <span class="footer-nav-label">Services</span>
-        <a href="#services" class="footer-link">AI Web・採用支援</a>
-        <a href="#services" class="footer-link">AI業務改善</a>
-        <a href="#services" class="footer-link">AI研修</a>
-      </nav>
-      <nav aria-label="会社情報ナビゲーション">
-        <span class="footer-nav-label">Company</span>
+      <nav aria-label="サイトナビゲーション">
+        <span class="footer-nav-label">Site</span>
+        <a href="#services" class="footer-link">Services</a>
+        <a href="#approach" class="footer-link">Approach</a>
         <a href="#about" class="footer-link">About</a>
-        <a href="#projects" class="footer-link">Lab</a>
-        <a href="#faq" class="footer-link">FAQ</a>
-      </nav>
-      <nav aria-label="その他ナビゲーション">
-        <span class="footer-nav-label">More</span>
         <a href="#contact" class="footer-link">Contact</a>
+      </nav>
+      <nav aria-label="法務ナビゲーション">
+        <span class="footer-nav-label">Legal</span>
         <a href="privacy.html" class="footer-link">Privacy Policy</a>
       </nav>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© PulseWorks Inc. All rights reserved.</span>
-      <span style="font-size:11px;color:#4C5F7A;">AIを活用して制作</span>
+      <span class="footer-copy">© PulseWorks Inc.</span>
+      <span class="footer-copy">Turn AI into operating systems for business.</span>
     </div>
   </div>
 </footer>
 
 <script>
-  // Header scroll
-  const hdr = document.getElementById('site-header');
-  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 20), { passive: true });
-
   // Mobile menu
   let menuOpen = false;
   function toggleMenu() {
     menuOpen = !menuOpen;
-    const nav = document.getElementById('mobile-nav');
-    nav.style.display = menuOpen ? 'flex' : 'none';
+    document.getElementById('mobile-nav').style.display = menuOpen ? 'flex' : 'none';
     document.getElementById('menu-btn').setAttribute('aria-expanded', menuOpen);
   }
   function closeMenu() {
@@ -894,21 +642,19 @@
     document.getElementById('menu-btn').setAttribute('aria-expanded', 'false');
   }
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false'); });
-      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
-    });
+  // Interest pill toggle
+  document.querySelectorAll('.int-pill').forEach(pill => {
+    const cb = pill.querySelector('input');
+    const update = () => pill.classList.toggle('checked', cb.checked);
+    cb.addEventListener('change', update);
+    update();
   });
 
-  // Reveal on scroll
+  // Scroll reveal
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
@@ -921,22 +667,17 @@
 
   function setErr(id, msg) {
     const el = document.getElementById(id);
-    el.textContent = msg;
-    el.style.display = msg ? 'block' : 'none';
+    el.textContent = msg; el.style.display = msg ? 'block' : 'none';
   }
-
   function showStatus(type, text) {
-    statusEl.textContent = text;
-    statusEl.style.display = 'block';
-    const map = { error: ['#FEF2F2','#B91C1C','#FECACA'], success: ['#ECFDF5','#047857','#A7F3D0'], info: ['#EFF4FF','#1D4ED8','#BFD2FE'] };
-    const [bg, color, border] = map[type];
-    Object.assign(statusEl.style, { background: bg, color, borderColor: border });
+    statusEl.textContent = text; statusEl.style.display = 'block';
+    const m = { error:['#FEF2F2','#B91C1C','#FECACA'], success:['#ECFDF5','#047857','#A7F3D0'], info:['#EFF4FF','#1D4ED8','#BFD2FE'] }[type];
+    Object.assign(statusEl.style, { background: m[0], color: m[1], borderColor: m[2] });
   }
 
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (form.querySelector('[name="website"]').value) return;
-
     const name    = form.querySelector('[name="name"]').value.trim();
     const company = form.querySelector('[name="company"]').value.trim();
     const email   = form.querySelector('[name="email"]').value.trim();
@@ -944,28 +685,17 @@
     const budget  = form.querySelector('[name="budget"]').value.trim();
     const timing  = form.querySelector('[name="timing"]').value.trim();
     const interests = [...form.querySelectorAll('[name="interest"]:checked')].map(c => c.value);
-
     let ok = true;
     setErr('err-name', name ? '' : 'お名前をご入力ください。'); if (!name) ok = false;
     if (!email) { setErr('err-email', 'メールアドレスをご入力ください。'); ok = false; }
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setErr('err-email', 'メールアドレスの形式をご確認ください。'); ok = false; }
     else setErr('err-email', '');
     setErr('err-msg', message ? '' : 'ご相談内容をご入力ください。'); if (!message) ok = false;
-
     if (!ok) { showStatus('error', '未入力の項目があります。ご確認ください。'); return; }
-
     if (CONTACT_EMAIL) {
-      const body = [
-        'お名前: ' + name,
-        '会社名: ' + (company || '（未記入）'),
-        'メールアドレス: ' + email,
-        '興味のある支援内容: ' + (interests.join(' / ') || '（未選択）'),
-        '予算感: ' + (budget || '（未記入）'),
-        '希望時期: ' + (timing || '（未記入）'),
-        '', 'ご相談内容:', message,
-      ].join('\n');
-      const sub = '【無料相談】' + (company ? company + ' / ' : '') + name + ' 様';
-      location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(sub) + '&body=' + encodeURIComponent(body);
+      const body = ['お名前: '+name,'会社名: '+(company||'（未記入）'),'メールアドレス: '+email,'興味のある支援内容: '+(interests.join(' / ')||'（未選択）'),'予算感: '+(budget||'（未記入）'),'希望時期: '+(timing||'（未記入）'),'','ご相談内容:',message].join('\n');
+      const sub = '【無料相談のお問い合わせ】'+(company?company+' / ':'')+name+' 様';
+      location.href = 'mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);
       showStatus('success', 'メールソフトを起動しました。そのまま送信してください。');
     } else {
       showStatus('info', 'お問い合わせ先は現在準備中です。後ほど改めてご案内します。');
