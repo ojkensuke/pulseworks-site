@@ -104,27 +104,16 @@ export function Contact() {
         body: JSON.stringify(form),
       });
 
-      if (res.ok) {
-        setSubmitted(true);
-        return;
-      }
-
-      if (res.status === 503) {
-        // Email backend not configured yet — fall back to the visitor's own mail client.
+      if (!res.ok) {
+        // Email backend not configured / send failed — fall back to the visitor's own mail client
+        // rather than blocking the submission entirely.
         openMailtoFallback();
-        setSubmitted(true);
-        return;
       }
-
-      setStatus({
-        type: "error",
-        text: "送信に失敗しました。お手数ですが contact@pulseworks.co.jp まで直接ご連絡ください。",
-      });
+      setSubmitted(true);
     } catch {
-      setStatus({
-        type: "error",
-        text: "通信エラーが発生しました。お手数ですが contact@pulseworks.co.jp まで直接ご連絡ください。",
-      });
+      // Network error reaching our own API — still fall back to mailto so the visitor isn't stuck.
+      openMailtoFallback();
+      setSubmitted(true);
     } finally {
       setSubmitting(false);
     }
