@@ -191,7 +191,7 @@ export function Contact() {
                 お問い合わせありがとうございます。
               </h3>
               <p className="mt-[14px] max-w-[440px] text-[15px]" style={{ lineHeight: 1.9, color: "#4B5563" }}>
-                内容を確認のうえ、営業日2〜3日以内にご返信します。メールソフトが起動しない場合は、お手数ですが{" "}
+                入力いただいたメールアドレスに確認メールをお送りしました。内容を確認のうえ、営業日2〜3日以内にご返信します。届かない場合は、お手数ですが{" "}
                 <a href="mailto:contact@pulseworks.co.jp" className="pw-mailto-link no-underline" style={{ color: "var(--ac-strong)" }}>
                   contact@pulseworks.co.jp
                 </a>{" "}
