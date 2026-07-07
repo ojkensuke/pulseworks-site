@@ -57,18 +57,7 @@ export function Contact() {
     return e;
   };
 
-  const onSubmit = (ev: React.FormEvent) => {
-    ev.preventDefault();
-    if (submitting) return;
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length) {
-      setErrors(validationErrors);
-      setStatus({ type: "error", text: "未入力の項目、または未同意の項目があります。ご確認ください。" });
-      return;
-    }
-
-    setSubmitting(true);
-    setStatus(null);
+  const openMailtoFallback = () => {
     const email = contactEmail();
     const lines = [
       "お名前: " + form.name,
@@ -83,22 +72,62 @@ export function Contact() {
     ];
     const subject = "【無料相談のお問い合わせ】" + (form.company ? form.company + " / " : "") + form.name + " 様";
     const href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n"));
+    try {
+      const a = document.createElement("a");
+      a.href = href;
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch {
+      // no-op — completion UI still shows
+    }
+  };
 
-    setTimeout(() => {
-      try {
-        const a = document.createElement("a");
-        a.href = href;
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      } catch {
-        // no-op — completion UI still shows
+  const onSubmit = async (ev: React.FormEvent) => {
+    ev.preventDefault();
+    if (submitting) return;
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length) {
+      setErrors(validationErrors);
+      setStatus({ type: "error", text: "未入力の項目、または未同意の項目があります。ご確認ください。" });
+      return;
+    }
+
+    setSubmitting(true);
+    setStatus(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        return;
       }
+
+      if (res.status === 503) {
+        // Email backend not configured yet — fall back to the visitor's own mail client.
+        openMailtoFallback();
+        setSubmitted(true);
+        return;
+      }
+
+      setStatus({
+        type: "error",
+        text: "送信に失敗しました。お手数ですが contact@pulseworks.co.jp まで直接ご連絡ください。",
+      });
+    } catch {
+      setStatus({
+        type: "error",
+        text: "通信エラーが発生しました。お手数ですが contact@pulseworks.co.jp まで直接ご連絡ください。",
+      });
+    } finally {
       setSubmitting(false);
-      setSubmitted(true);
-      setStatus(null);
-    }, 700);
+    }
   };
 
   const onReset = () => {

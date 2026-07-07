@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PulseWorks コーポレートサイト
 
-## Getting Started
+株式会社PulseWorks(PulseWorks Inc.)の公式サイト。Next.js (App Router) + TypeScript + Tailwind CSS。
 
-First, run the development server:
+## ページ構成
+
+| パス | 内容 |
+| --- | --- |
+| `/` | トップページ(ヘッダー / ヒーロー / 課題提起 / Services / Why / How We Work / PulseWorks Lab / About / お問い合わせフォーム / フッター) |
+| `/company` | 会社概要 |
+| `/privacy` | プライバシーポリシー |
+
+## 開発
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # 開発サーバー起動 (http://localhost:3000)
+npm run build    # 本番ビルド
+npm run lint     # ESLint
+npx tsc --noEmit # 型チェック
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## お問い合わせフォームの送信の仕組み
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`components/Contact.tsx` → `app/api/contact/route.ts` (Resend 経由でサーバーサイド送信)。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- フロントエンドバリデーション(必須項目・メール形式・同意チェック)に加え、APIルート側でも同じ内容をサーバーサイドで再検証する。
+- `RESEND_API_KEY` が未設定の場合は `503` を返し、フロントエンドは自動的に `mailto:` リンクを開く方式にフォールバックする(送信できないまま壊れることはない)。
+- 送信成功時は「管理者宛の通知メール」と「送信者宛の自動返信メール」の2通を送る。
 
-## Learn More
+### 必要な環境変数(Vercel の Environment Variables に設定)
 
-To learn more about Next.js, take a look at the following resources:
+| 変数名 | 必須 | 内容 |
+| --- | --- | --- |
+| `RESEND_API_KEY` | ○ | [resend.com](https://resend.com) で発行するAPIキー。未設定の間は自動的に `mailto:` フォールバックで動作する。 |
+| `CONTACT_NOTIFY_EMAIL` | - | 管理者への通知メール送信先。未設定時は `contact@pulseworks.co.jp`。 |
+| `CONTACT_FROM_EMAIL` | - | 送信元アドレス(例: `PulseWorks <contact@pulseworks.co.jp>`)。ドメイン未認証の間は Resend のサンドボックスアドレス(`onboarding@resend.dev`)を使う。 |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | - | フォールバックの `mailto:` 送信先を上書きしたい場合のみ設定。 |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## コード外で必要な作業
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **`contact@pulseworks.co.jp` の受信設定**: Google Workspace 側でメールボックスまたはエイリアスを作成してください(サイト側は表示・リンク・送信のみ)。
+- **Resend でのメール送信を有効化する手順**:
+  1. [resend.com](https://resend.com) でアカウント作成。
+  2. Resend の管理画面で `pulseworks.co.jp` ドメインを追加し、指示される TXT / CNAME / DKIM レコードをDNS(現在の登録事業者側)に追加してドメイン認証を完了する。
+  3. API キーを発行し、Vercel プロジェクトの Environment Variables に `RESEND_API_KEY` として設定する。
+  4. ドメイン認証が済んだら `CONTACT_FROM_EMAIL` を `PulseWorks <contact@pulseworks.co.jp>` などに設定する。
+- 上記が未設定の間は、フォームは自動的に visitor 自身のメールソフトを起動する `mailto:` 方式で動作し続けるため、サイトが壊れることはない。
 
-## Deploy on Vercel
+## 今後差し替えるべき箇所
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Cookie・アクセス解析: 現状 GA / GTM / Clarity 等の計測タグは未導入。導入時はプライバシーポリシー第6項に具体ツール名とオプトアウト導線を追記する。
+- PulseWorks Lab の各カード(公開可能になり次第、実プロジェクトへ差し替え)
+- 本番 OGP 画像(現状はロゴアイコンを流用)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 捏造していない項目
+
+顧客実績・導入社数・売上・ロゴ・口コミ・受賞歴・数値成果は一切記載していません。PulseWorks Lab は「自主制作・実証プロジェクト」と明記しています。
