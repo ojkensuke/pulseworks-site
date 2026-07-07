@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
+/* ============================================================
+   PulseWorks Design Tokens
+   Source: Claude Design "PulseWorks企業サイト再デザイン" project
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --pw-blue-50: #eff4ff;
+  --pw-blue-600: #2563eb;
+  --pw-blue-700: #1d4ed8;
+  --pw-ink-900: #0b1220;
+  --pw-ink-800: #111827;
+  --pw-ink-700: #1f2937;
+  --pw-ink-600: #374151;
+  --pw-ink-500: #4b5563;
+  --pw-ink-400: #6b7280;
+  --pw-border-subtle: #e5e7eb;
+  --pw-border-soft: #eef2f7;
+  --pw-border-strong: #cbd5e1;
+  --pw-danger: #ef4444;
+
+  --r-btn: 8px;
+  --r-pill: 999px;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.25);
+
+  /* accent theme (single accent, "blue" per design token spec) */
+  --ac: #608cfa;
+  --ac-strong: #3b6bf5;
+  --ac-ink: #0b1220;
+  --ink: #0b1220;
+  --paper: #fbfcfe;
+
+  --font-inter-var: var(--font-inter);
+  --font-noto-jp-var: var(--font-noto-jp);
+  --font-jetbrains-var: var(--font-jetbrains);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter-var), var(--font-noto-jp-var), -apple-system, BlinkMacSystemFont,
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+  --font-jp: var(--font-noto-jp-var), "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+  --font-mono: var(--font-jetbrains-var), "SF Mono", Menlo, Consolas, monospace;
+
+  --color-ink-900: #0b1220;
+  --color-paper: #fbfcfe;
+  --color-accent: #3b6bf5;
+  --color-accent-bright: #608cfa;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(96, 140, 250, 0.3);
+}
+
+/* ---------- Hover / focus states (ported from style-hover / style-focus) ---------- */
+.pw-nav-link:hover {
+  color: #fff;
+}
+.pw-btn-primary:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+.pw-btn-header-cta:hover {
+  background: #fff;
+}
+.pw-btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+}
+.pw-hero-list-link:hover {
+  padding-left: 6px;
+}
+.pw-service-row:hover {
+  background: #f7faff;
+  box-shadow: 0 18px 40px -24px rgba(11, 18, 32, 0.28);
+}
+.pw-service-cta:hover {
+  gap: 12px;
+  background: var(--pw-blue-700);
+}
+.pw-why-cell:hover {
+  background: #0e1729;
+}
+.pw-lab-row:hover {
+  background: #fff;
+}
+.pw-footer-link:hover {
+  color: #fff;
+}
+.pw-mailto-link:hover {
+  text-decoration: underline;
+}
+.pw-reset-btn:hover {
+  background: #fff;
+  border-color: var(--ac-strong);
+}
+.pw-submit-btn:hover {
+  background: var(--pw-blue-700);
+  transform: translateY(-1px);
+}
+.pw-submit-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.pw-field:focus {
+  border-color: var(--ac-strong);
 }
