@@ -12,12 +12,23 @@ type FormState = {
   interests: string[];
   budget: string;
   timing: string;
+  // Honeypot — must stay empty. See app/api/contact/route.ts.
+  website: string;
 };
 
 type Errors = Partial<Record<"name" | "email" | "message" | "consent", string>>;
 type Status = { type: "error" | "success" | "info"; text: string } | null;
 
-const emptyForm: FormState = { name: "", company: "", email: "", message: "", interests: [], budget: "", timing: "" };
+const emptyForm: FormState = {
+  name: "",
+  company: "",
+  email: "",
+  message: "",
+  interests: [],
+  budget: "",
+  timing: "",
+  website: "",
+};
 
 function contactEmail() {
   if (typeof window !== "undefined") {
@@ -208,6 +219,18 @@ export function Contact() {
             </div>
           ) : (
             <form onSubmit={onSubmit} noValidate className="flex flex-col gap-6">
+              <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+                <label htmlFor="v2-website">Website</label>
+                <input
+                  id="v2-website"
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={(e) => setField("website", e.target.value)}
+                />
+              </div>
               <div className="grid gap-6 sm:grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
                 <div className="flex flex-col gap-[9px]">
                   <label htmlFor="v2-name" className="flex items-center gap-2 text-[13px] font-semibold" style={{ color: "var(--pw-ink-800)" }}>

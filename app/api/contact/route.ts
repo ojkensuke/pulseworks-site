@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { isRateLimited } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -11,7 +12,16 @@ type ContactPayload = {
   interests?: string[];
   budget?: string;
   timing?: string;
+  // Honeypot: real visitors never see or fill this field. Bots that
+  // auto-fill every input in a form will populate it.
+  website?: string;
 };
+
+function clientIp(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  return request.headers.get("x-real-ip") || "unknown";
+}
 
 function validate(body: Partial<ContactPayload>): string[] {
   const errors: string[] = [];
@@ -36,11 +46,20 @@ function buildInquiryText(body: ContactPayload): string {
 }
 
 export async function POST(request: Request) {
+  if (isRateLimited(clientIp(request))) {
+    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
   let body: Partial<ContactPayload>;
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_json" }, { status: 400 });
+  }
+
+  if (body.website) {
+    // Honeypot tripped — pretend success so the bot doesn't adapt, but send nothing.
+    return NextResponse.json({ ok: true });
   }
 
   const errors = validate(body);
