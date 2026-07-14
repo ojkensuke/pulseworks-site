@@ -6,7 +6,7 @@ export function Problems() {
     <section style={{ background: "var(--paper)", padding: "clamp(72px,10vw,128px) 0" }}>
       <div className="mx-auto max-w-[1240px] px-[clamp(20px,5vw,56px)]">
         <div className="grid items-start gap-[clamp(32px,5vw,72px)] md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-          <div className="sticky top-[100px]">
+          <div className="md:sticky md:top-[100px]">
             <Eyebrow label="Challenges" />
             <h2
               className="font-jp m-0 font-extrabold"

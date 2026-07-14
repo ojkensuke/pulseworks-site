@@ -150,7 +150,7 @@ export function Contact() {
     <section id="contact" className="scroll-mt-[76px]" style={{ background: "#fff", padding: "clamp(80px,11vw,144px) 0" }}>
       <div className="mx-auto max-w-[1240px] px-[clamp(20px,5vw,56px)]">
         <div className="grid items-start gap-[clamp(40px,5vw,88px)] md:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
-          <div className="sticky top-[100px]">
+          <div className="md:sticky md:top-[100px]">
             <div className="mb-[22px] flex items-center gap-3">
               <span className="h-px w-6" style={{ background: "var(--ink)" }} />
               <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.16em]" style={{ color: "var(--ink)" }}>
