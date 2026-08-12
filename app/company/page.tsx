@@ -3,14 +3,14 @@ import Link from "next/link";
 import { companyRows } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "会社概要 | 株式会社PulseWorks(パルスワークス)",
+  title: "会社概要 | 株式会社PulseWorks",
   description:
     "株式会社PulseWorks(パルスワークス)の会社概要。所在地、代表者、設立、資本金、事業内容などの企業情報を掲載しています。",
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
-    siteName: "PulseWorks(パルスワークス)",
-    title: "会社概要 | 株式会社PulseWorks(パルスワークス)",
+    siteName: "PulseWorks",
+    title: "会社概要 | 株式会社PulseWorks",
     description: "株式会社PulseWorks(パルスワークス)の企業情報(所在地・代表者・設立・資本金・事業内容)。",
     images: ["/assets/pulse-icon-primary.svg"],
   },
