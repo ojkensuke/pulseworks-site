@@ -25,16 +25,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://pulseworks.co.jp"),
-  title: "PulseWorks | AIを、事業を動かす仕組みに。",
+  title: "PulseWorks(パルスワークス)| AIを、事業を動かす仕組みに。",
   description:
-    "PulseWorksは、生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて、企業の事業成長を支援します。",
+    "株式会社PulseWorks(パルスワークス)は、生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて、企業の事業成長を支援します。",
   icons: {
     icon: "/assets/favicon.svg",
   },
   openGraph: {
     type: "website",
-    siteName: "PulseWorks",
-    title: "PulseWorks | AIを、事業を動かす仕組みに。",
+    siteName: "PulseWorks(パルスワークス)",
+    title: "PulseWorks(パルスワークス)| AIを、事業を動かす仕組みに。",
     description: "生成AIを現場で使える成果へ。課題整理から設計・実装・改善・定着まで伴走します。",
     images: ["/assets/pulse-icon-primary.svg"],
   },
@@ -47,10 +47,10 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "株式会社PulseWorks",
-  alternateName: "PulseWorks Inc.",
+  alternateName: ["パルスワークス", "株式会社パルスワークス", "PulseWorks Inc."],
   url: "https://pulseworks.co.jp",
   logo: "/assets/pulseworks-logo-horizontal.svg",
-  description: "生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて企業の事業成長を支援する会社。",
+  description: "株式会社PulseWorks(パルスワークス)は、生成AIを活用したWeb制作、採用支援、業務改善、AI研修を通じて企業の事業成長を支援する会社。",
   slogan: "AIを、事業を動かす仕組みに。",
 };
 

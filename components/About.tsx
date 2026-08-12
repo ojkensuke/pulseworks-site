@@ -16,7 +16,7 @@ export function About() {
             </h2>
             <div className="mt-[30px] flex max-w-[560px] flex-col gap-5">
               <p className="m-0 text-[clamp(15px,1.5vw,17px)]" style={{ lineHeight: 1.95, color: "#C7D2E5" }}>
-                PulseWorksは、生成AIを活用して、企業や個人の「次の一歩」を形にする会社です。
+                PulseWorks(パルスワークス)は、生成AIを活用して、企業や個人の「次の一歩」を形にする会社です。
               </p>
               <p className="m-0 text-[clamp(15px,1.5vw,17px)]" style={{ lineHeight: 1.95, color: "#93A3BE" }}>
                 AIは、導入するだけでは成果につながりません。事業の課題を整理し、業務や顧客体験に落とし込み、現場で使われ続ける仕組みにして初めて価値になります。私たちは、戦略・クリエイティブ・テクノロジーを横断しながら、構想から実装、改善まで伴走します。

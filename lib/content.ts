@@ -86,7 +86,7 @@ export const interestLabels = [
 ] as const;
 
 export const companyRows = [
-  { label: "会社名", value: "株式会社PulseWorks（PulseWorks Inc.）" },
+  { label: "会社名", value: "株式会社PulseWorks（パルスワークス / PulseWorks Inc.）" },
   { label: "代表者", value: "代表取締役 小塩 健介" },
   { label: "所在地", value: "〒150-0044 東京都渋谷区円山町5番5号 Navi渋谷V 3階" },
   { label: "設立", value: "2026年4月14日" },

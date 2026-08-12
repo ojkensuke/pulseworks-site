@@ -3,14 +3,15 @@ import Link from "next/link";
 import { companyRows } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "会社概要 | 株式会社PulseWorks",
-  description: "株式会社PulseWorksの会社概要。所在地、代表者、設立、資本金、事業内容などの企業情報を掲載しています。",
+  title: "会社概要 | 株式会社PulseWorks(パルスワークス)",
+  description:
+    "株式会社PulseWorks(パルスワークス)の会社概要。所在地、代表者、設立、資本金、事業内容などの企業情報を掲載しています。",
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
-    siteName: "PulseWorks",
-    title: "会社概要 | 株式会社PulseWorks",
-    description: "株式会社PulseWorksの企業情報(所在地・代表者・設立・資本金・事業内容)。",
+    siteName: "PulseWorks(パルスワークス)",
+    title: "会社概要 | 株式会社PulseWorks(パルスワークス)",
+    description: "株式会社PulseWorks(パルスワークス)の企業情報(所在地・代表者・設立・資本金・事業内容)。",
     images: ["/assets/pulse-icon-primary.svg"],
   },
 };
@@ -19,7 +20,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "株式会社PulseWorks",
-  alternateName: "PulseWorks Inc.",
+  alternateName: ["パルスワークス", "株式会社パルスワークス", "PulseWorks Inc."],
   url: "https://pulseworks.co.jp",
   logo: "/assets/pulseworks-logo-horizontal.svg",
   email: "contact@pulseworks.co.jp",
@@ -76,7 +77,7 @@ export default function CompanyPage() {
             会社概要
           </h1>
           <p className="mt-[22px] max-w-[560px] text-[clamp(15px,1.6vw,17px)]" style={{ lineHeight: 1.9, color: "#93A3BE" }}>
-            PulseWorksは、生成AIを活用して企業や個人の「次の一歩」を形にする会社です。構想から実装、改善まで横断して伴走します。
+            株式会社PulseWorks(パルスワークス)は、生成AIを活用して企業や個人の「次の一歩」を形にする会社です。構想から実装、改善まで横断して伴走します。
           </p>
         </div>
       </section>

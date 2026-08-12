@@ -22,7 +22,7 @@ export function Footer() {
               AIを、事業を動かす仕組みに。
             </p>
             <p className="mt-[10px] font-mono text-xs tracking-[0.02em]" style={{ color: "#6B7A95" }}>
-              株式会社PulseWorks
+              株式会社PulseWorks(パルスワークス)
             </p>
           </div>
           <nav aria-label="サイト" className="flex flex-col gap-[14px]">
