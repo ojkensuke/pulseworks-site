@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   description:
     "株式会社PulseWorksのプライバシーポリシー。取得する個人情報、利用目的、第三者提供、安全管理措置、開示等の請求、Cookieの取り扱いについて記載しています。",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "/privacy",
+  },
   openGraph: {
     type: "website",
     siteName: "PulseWorks",

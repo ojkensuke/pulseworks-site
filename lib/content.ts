@@ -89,6 +89,7 @@ export const companyRows = [
   { label: "会社名", value: "株式会社PulseWorks（パルスワークス / PulseWorks Inc.）" },
   { label: "代表者", value: "代表取締役 小塩 健介" },
   { label: "所在地", value: "〒150-0044 東京都渋谷区円山町5番5号 Navi渋谷V 3階" },
+  { label: "法人番号", value: "4011001177194" },
   { label: "設立", value: "2026年4月14日" },
   { label: "資本金", value: "300万円" },
   {
@@ -102,5 +103,6 @@ export const companyRows = [
       "海外市場調査・事業開発支援",
     ],
   },
+  { label: "公式サイト", url: "https://pulseworks.co.jp" },
   { label: "お問い合わせ", email: "contact@pulseworks.co.jp" },
 ];

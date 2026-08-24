@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "株式会社PulseWorks(パルスワークス)の会社概要。所在地、代表者、設立、資本金、事業内容などの企業情報を掲載しています。",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "/company",
+  },
   openGraph: {
     type: "website",
     siteName: "PulseWorks",
@@ -16,30 +19,24 @@ export const metadata: Metadata = {
   },
 };
 
-const organizationJsonLd = {
+// The Organization itself is defined once in app/layout.tsx
+// (@id https://pulseworks.co.jp/#organization) — this page only declares
+// that it is the AboutPage whose main entity is that organization.
+const aboutPageJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "株式会社PulseWorks",
-  alternateName: ["パルスワークス", "株式会社パルスワークス", "PulseWorks Inc."],
-  url: "https://pulseworks.co.jp",
-  logo: "/assets/pulseworks-logo-horizontal.svg",
-  email: "contact@pulseworks.co.jp",
-  foundingDate: "2026-04-14",
-  founder: { "@type": "Person", name: "小塩 健介" },
-  address: {
-    "@type": "PostalAddress",
-    postalCode: "150-0044",
-    addressRegion: "東京都",
-    addressLocality: "渋谷区",
-    streetAddress: "円山町5番5号 Navi渋谷V 3階",
-    addressCountry: "JP",
-  },
+  "@type": "AboutPage",
+  "@id": "https://pulseworks.co.jp/company#about",
+  url: "https://pulseworks.co.jp/company",
+  name: "会社概要 | 株式会社PulseWorks",
+  inLanguage: "ja",
+  isPartOf: { "@id": "https://pulseworks.co.jp/#website" },
+  mainEntity: { "@id": "https://pulseworks.co.jp/#organization" },
 };
 
 export default function CompanyPage() {
   return (
     <div style={{ background: "var(--paper)", color: "#1F2937" }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageJsonLd) }} />
 
       <header
         className="sticky top-0 z-[60] border-b border-white/[0.08] backdrop-blur-[14px]"
@@ -111,6 +108,10 @@ export default function CompanyPage() {
                   ) : r.email ? (
                     <a href={`mailto:${r.email}`} className="pw-mailto-link font-medium no-underline" style={{ color: "var(--ac-strong)" }}>
                       {r.email}
+                    </a>
+                  ) : r.url ? (
+                    <a href={r.url} className="pw-mailto-link font-medium no-underline" style={{ color: "var(--ac-strong)" }}>
+                      {r.url}
                     </a>
                   ) : (
                     <span>{r.value}</span>
